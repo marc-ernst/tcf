@@ -83,6 +83,17 @@ byte is defined by main error report.</p>
     <dt><code><b>BYTE_CANNOT_WRITE = 0x08</b></code> <dd>cannot write the byte
 </dl>
 
+<h3><a name='MemoryAceesMode'>Memory Access Mode</a></h3>
+<p>The memory access commands have <i>&lt;int: mode&gt;</i> argument. The mode is logical OR of any combination of:</p>
+<ul type='disc'>
+    <li>0x1 &ndash; continue on error (like bus error or page fault)
+    <li>0x2 &ndash; verify data after reading or writing by re-reading and compare
+    <li>0x4 &ndash; don't block access when memory address is known to be invalid
+    <li>0x8 &ndash; don't flush or invalidate caches
+    <li>0x10 &ndash; don't stop contexts in the process group
+    <li>0x20 &ndash; block access to memory mapped I/O
+</ul>
+
 <h2><a name='Cmds'>Commands</a></h2>
 
 <h3><a name='CmdGetContext'>Get Context</a></h3>
@@ -235,13 +246,7 @@ C &bull; &lt;token&gt; &bull; Memory &bull; set &bull;
 
 <p>Writes data bytes at given address in memory, "word size" bytes at a time. Address
 should be aligned by "word size". Context ID must be one returned by getContexts.
-Mode is logical OR of any combination of:</p>
-
-<ul type='disc'>
-    <li>0x1 &ndash; continue on error (like bus error or page fault)
-
-    <li>0x2 &ndash; verify data after writing by reading back and compare
-</ul>
+See <a href='#MemoryAceesMode'>Memory Access Mode</a> for encoding of "mode".</p>
 
 <p>Result message:</p>
 
@@ -263,13 +268,7 @@ C &bull; &lt;token&gt; &bull; Memory &bull; get &bull;
 
 <p>Reads data bytes at given address in memory, "word size" bytes at a time. Address
 should be aligned by "word size". Context ID must be one returned by getContexts.
-Mode is logical OR of any combination of:</p>
-
-<ul type='disc'>
-    <li>0x1 &ndash; continue on error (like bus error or page fault)
-
-    <li>0x2 &ndash; verify data after reading by re-reading and compare
-</ul>
+See <a href='#MemoryAceesMode'>Memory Access Mode</a> for encoding of "mode".</p>
 
 <p>Result message:</p>
 
@@ -291,14 +290,8 @@ C &bull; &lt;token&gt; &bull; Memory &bull; fill &bull;
 
 <p>Writes pattern bytes at given address in memory, "word size" bytes at a time. Address
 should be aligned by "word size". If "byte count" is bigger then pattern size, then
-pattern is repeated necessary number of times. Context ID must be one returned by
-getContexts. Mode is logical OR of any combination of:</p>
-
-<ul type='disc'>
-    <li>0x1 &ndash; continue on error (like bus error or page fault)
-
-    <li>0x2 &ndash; verify data after writing by reading back and compare
-</ul>
+pattern is repeated necessary number of times. Context ID must be one returned by getContexts.
+See <a href='#MemoryAceesMode'>Memory Access Mode</a> for encoding of "mode".</p>
 
 <p>Result message:</p>
 
@@ -488,6 +481,13 @@ E &bull; Memory &bull; memoryChanged &bull; <i>&lt;string: context ID&gt;</i> &b
      * <font color=#7F9FBF>@since</font> 1.7
      */</font>
     <font color=#7F0055>static final int</font> MODE_DONT_STOP = 0x10;
+
+    <font color=#3F5FBF>/**
+     * Memory access mode:
+     * Block access to memory mapped I/O.
+     * <font color=#7F9FBF>@since</font> 1.8
+     */</font>
+    <font color=#7F0055>static final int</font> MODE_MEMORY_ONLY = 0x20;
 
     <font color=#3F5FBF>/**
      * <font color=#7F9FBF>@noimplement</font> This interface is not intended to be implemented by clients.

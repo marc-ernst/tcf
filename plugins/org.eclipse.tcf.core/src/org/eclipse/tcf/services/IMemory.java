@@ -162,6 +162,13 @@ public interface IMemory extends IService {
     static final int MODE_DONT_STOP = 0x10;
 
     /**
+     * Memory access mode:
+     * Block access to memory mapped I/O.
+     * @since 1.8
+     */
+    static final int MODE_MEMORY_ONLY = 0x20;
+
+    /**
      * @noimplement This interface is not intended to be implemented by clients.
      */
     interface MemoryContext {
