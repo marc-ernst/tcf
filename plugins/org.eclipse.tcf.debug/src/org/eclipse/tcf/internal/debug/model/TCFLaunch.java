@@ -34,8 +34,10 @@ import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.core.variables.IStringVariableManager;
 import org.eclipse.core.variables.VariablesPlugin;
 import org.eclipse.debug.core.DebugException;
@@ -69,6 +71,7 @@ import org.eclipse.tcf.services.IRunControl.RunControlContext;
 import org.eclipse.tcf.services.IStreams;
 import org.eclipse.tcf.util.TCFDataCache;
 import org.eclipse.tcf.util.TCFTask;
+import org.eclipse.ui.progress.UIJob;
 
 /**
  * TCFLaunch class represents an active TCF debug connection.
@@ -1186,26 +1189,52 @@ public class TCFLaunch extends Launch {
     public void launchConfigurationChanged(final ILaunchConfiguration cfg) {
         super.launchConfigurationChanged(cfg);
         if (!cfg.equals(getLaunchConfiguration())) return;
-        if (channel != null && channel.getState() == IChannel.STATE_OPEN && !connecting) {
-            new TCFTask<Boolean>(channel) {
-                public void run() {
-                    try {
-                        if (update_memory_maps != null) update_memory_maps.run();
-                        readPathMapConfiguration(cfg);
-                        applyPathMap(new Runnable() {
+        new UIJob("Updating Memory Map...") {
+
+            @Override
+            public IStatus runInUIThread(IProgressMonitor monitor) {
+                SubMonitor subMonitor = SubMonitor.convert(monitor);
+                subMonitor.beginTask("Updating Memory Map...", 2);
+                try {
+                    subMonitor.worked(1);                    
+                    if (channel != null && channel.getState() == IChannel.STATE_OPEN && !connecting) {
+                        new TCFTask<Boolean>(channel) {
                             public void run() {
-                                done(false);
+                                try {
+                                    if (update_memory_maps != null) update_memory_maps.run();
+                                    readPathMapConfiguration(cfg);
+                                    applyPathMap(new Runnable() {
+                                        public void run() {
+                                            done(false);
+                                        }
+                                    });
+                                }
+                                catch (Throwable x) {
+                                    channel.terminate(x);
+                                    done(false);
+                                }
                             }
-                        });
+                        }.getE();   
+                        // TODO: update signal masks when launch configuration changes
+
+                        if (subMonitor.isCanceled()) {
+                            return Status.CANCEL_STATUS;
+                        }
                     }
-                    catch (Throwable x) {
-                        channel.terminate(x);
-                        done(false);
+                    subMonitor.worked(1);
+                    return Status.OK_STATUS;
+                } catch (CancellationException e) {
+                    return Status.CANCEL_STATUS;
+                } catch (Exception e) {
+                    return Status.OK_STATUS;
+                } finally {
+                    subMonitor.done();
+                    if (monitor != null) {
+                        monitor.done();
                     }
                 }
-            }.getE();
-            // TODO: update signal masks when launch configuration changes
-        }
+            }
+        }.schedule();
     }
 
     @Override
