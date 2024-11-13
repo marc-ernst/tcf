@@ -38,7 +38,7 @@ Require-Bundle: org.eclipse.core.expressions;bundle-version="3.4.400",
  org.eclipse.ui.forms;bundle-version="3.5.200",
  org.eclipse.ui.navigator;bundle-version="3.5.200",
  org.eclipse.ui.views.properties.tabbed;bundle-version="3.5.300"
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Bundle-ActivationPolicy: lazy
 Bundle-Localization: plugin
 Export-Package: org.eclipse.tcf.te.tcf.launch.ui.activator;x-internal:=true,
