@@ -520,8 +520,8 @@ public abstract class AbstractChannel implements IChannel {
                         int level = remote_congestion_level;
                         if (level > 0) delay = level * 10;
                         if (last || delay > 0) flush();
-                        if (delay > 0) sleep(delay);
-                        else yield();
+                        if (delay > 0) Thread.sleep(delay);
+                        else Thread.yield();
                     }
                     write(EOS);
                     write(EOM);
