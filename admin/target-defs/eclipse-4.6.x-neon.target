@@ -23,7 +23,7 @@
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.rse.feature.group" version="3.7.2.201610260947"/>
 <unit id="org.eclipse.rse.terminals.feature.group" version="3.8.0.201610260947"/>
-<repository location="http://download.eclipse.org/tm/updates/4.2"/>
+<repository location="http://archive.eclipse.org/tm/updates/4.2"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.cdt.sdk.feature.group" version="9.2.1.201704050430"/>

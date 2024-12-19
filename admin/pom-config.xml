@@ -59,14 +59,14 @@
         <tycho.scmUrl>scm:git:git://git.eclipse.org/gitroot/tcf/org.eclipse.tcf.git</tycho.scmUrl>
 
         <!-- P2 repository URL's -->
-        <!-- Default: Eclipse 3.8.x (Juno), CDT 8.3.0 (Kepler SR2), TM 4.0 + Remote 2.0 (Mars) -->
-        <platform-site>https://download.eclipse.org/eclipse/updates/3.8</platform-site>
+        <!-- Default: Eclipse 4.3.2 (Kepler SR2), CDT 8.3.0 (Kepler SR2), TM 4.0 + Remote 2.0 (Mars) -->
+        <platform-site>https://download.eclipse.org/eclipse/updates/4.3</platform-site>
         <license-site>https://download.eclipse.org/cbi/updates/license</license-site>
         <cdt-site>https://archive.eclipse.org/tools/cdt/releases/kepler</cdt-site>
-        <tm-site>https://download.eclipse.org/tm/updates/4.0</tm-site>
+        <tm-site>https://archive.eclipse.org/tm/updates/4.0</tm-site>
         <terminal-site>https://download.eclipse.org/tm/terminal/updates/4.0</terminal-site>
-        <!-- TCF needs gson-2.2.4 which was added to Orbit in Luna SR2 -->
-        <orbit-site>https://download.eclipse.org/tools/orbit/downloads/drops/R20150124073747/repository/</orbit-site>
+        <!-- TCF needs gson-2.2.4 from Orbit -->
+        <orbit-site>https://download.eclipse.org/tools/orbit/downloads/drops/R20160221192158/repository/</orbit-site>
     </properties>
 
     <repositories>
@@ -125,20 +125,11 @@
 
     <profiles>
         <profile>
-            <!-- Eclipse 3.8 (Juno), CDT 8.3.0 (Kepler SR2) -->
-            <id>juno</id>
-
-            <properties>
-                <!-- Same as default -->
-            </properties>
-        </profile>
-
-        <profile>
             <!-- Eclipse 4.3.2 (Kepler SR2), CDT 8.3.0 (Kepler SR2) -->
             <id>kepler</id>
 
             <properties>
-                <platform-site>https://download.eclipse.org/eclipse/updates/4.3</platform-site>
+                <!-- Same as default -->
             </properties>
         </profile>
 
@@ -158,7 +149,6 @@
 
             <properties>
                 <platform-site>https://download.eclipse.org/eclipse/updates/4.5</platform-site>
-                <orbit-site>https://download.eclipse.org/tools/orbit/downloads/drops/R20160221192158/repository</orbit-site>
                 <cdt-site>https://archive.eclipse.org/tools/cdt/releases/8.8.1</cdt-site>
             </properties>
         </profile>
@@ -172,7 +162,7 @@
                 <orbit-site>https://download.eclipse.org/tools/orbit/downloads/drops/R20170307180635/repository</orbit-site>
                 <cdt-site>https://archive.eclipse.org/tools/cdt/releases/9.2</cdt-site>
                 <terminal-site>https://download.eclipse.org/tm/terminal/updates/4.2</terminal-site>
-                <tm-site>https://download.eclipse.org/tm/updates/4.2</tm-site>
+                <tm-site>https://archive.eclipse.org/tm/updates/4.2</tm-site>
             </properties>
 
             <!-- Workaround for CDT release problem:
@@ -182,7 +172,7 @@
             <repositories>
                 <repository>
                     <id>cdt-launchbar</id>
-                    <url>https://download.eclipse.org/tools/cdt/launchbar/neon.2</url>
+                    <url>https://archive.eclipse.org/tools/cdt/launchbar/neon.2</url>
                     <layout>p2</layout>
                 </repository>
             </repositories>
@@ -207,7 +197,7 @@
             <repositories>
                 <repository>
                     <id>cdt-launchbar</id>
-                    <url>https://download.eclipse.org/tools/cdt/launchbar/neon.2</url>
+                    <url>https://archive.eclipse.org/tools/cdt/launchbar/neon.2</url>
                     <layout>p2</layout>
                 </repository>
             </repositories>
@@ -232,7 +222,7 @@
             <repositories>
                 <repository>
                     <id>cdt-launchbar</id>
-                    <url>https://download.eclipse.org/tools/cdt/launchbar/neon.2</url>
+                    <url>https://archive.eclipse.org/tools/cdt/launchbar/neon.2</url>
                     <layout>p2</layout>
                 </repository>
             </repositories>
@@ -269,9 +259,9 @@
             <properties>
                 <platform-site>https://download.eclipse.org/releases/2021-12</platform-site>
                 <orbit-site>https://download.eclipse.org/tools/orbit/downloads/drops/R20211213173813/repository</orbit-site>
-                <cdt-site>https://download.eclipse.org/tools/cdt/releases/10.5</cdt-site>
+                <cdt-site>https://archive.eclipse.org/tools/cdt/releases/10.5</cdt-site>
                 <terminal-site>https://download.eclipse.org/tm/terminal/updates/4.4milestones</terminal-site>
-                <tm-site>https://download.eclipse.org/tm/updates/4.5.300-SNAPSHOT/repository</tm-site>
+                <tm-site>https://archive.eclipse.org/tm/updates/4.5.300-SNAPSHOT/repository</tm-site>
             </properties>
 
             <repositories>
