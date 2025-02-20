@@ -1466,13 +1466,22 @@ public class TCFLaunch extends Launch {
             throw new DebugException(new TCFError(x));
         }
     }
+    
+    private boolean getCanTerminateValue() {
+        return (isConnected() || isConnecting()) && process != null && process.canTerminate();
+    }
 
     @Override
     public boolean canTerminate() {
+        // Make sure to avoid deadlocks
+        if (Protocol.isDispatchThread()) {
+            return getCanTerminateValue();
+        }
+        
         try {
             return new TCFTask<Boolean>(8000) {
                 public void run() {
-                    done(!disconnected && process != null && process.canTerminate());
+                    done(getCanTerminateValue());
                 }
             }.get();
         }
