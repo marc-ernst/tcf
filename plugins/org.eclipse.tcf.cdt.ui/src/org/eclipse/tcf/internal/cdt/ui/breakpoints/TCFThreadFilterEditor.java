@@ -203,16 +203,17 @@ public class TCFThreadFilterEditor {
     public class ThreadFilterContentProvider implements ITreeContentProvider {
 
         public Object[] getChildren(Object parent) {
+            Object[] result = null;
             if (parent instanceof Context) {
-                return filterList(syncGetThreads((Context) parent));
+                result = syncGetThreads((Context) parent);
             }
             if (parent instanceof ILaunch) {
-                return filterList(syncGetContainers((TCFLaunch) parent));
+                result = syncGetContainers((TCFLaunch) parent);
             }
             if (parent instanceof ILaunchManager) {
-                return filterList(getLaunches());
+                result = getLaunches();
             }
-            return new Object[0];
+            return result != null ? filterList(result) : new Object[0];
         }
 
         public Object[] filterList(Object[] resultArray) {
@@ -823,6 +824,7 @@ public class TCFThreadFilterEditor {
         Context[] result = fContextsPerContainer.get(container);
         if (result != null) return result;
         final TCFLaunch launch = getLaunch(container);
+        if (launch == null) return null;
         result = new TCFTask<Context[]>(launch.getChannel()) {
             public void run() {
                 List<Context> contexts = new ArrayList<Context>();
