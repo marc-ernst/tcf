@@ -49,7 +49,6 @@
       <import plugin="org.eclipse.ui.workbench.texteditor" version="3.8.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.tm.terminal.control" version="4.0.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.tcf.core" version="1.9.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.tcf.debug" version="1.9.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.tcf" version="1.9.0" match="greaterOrEqual"/>
       <import feature="org.eclipse.tcf.core.feature" version="1.9.0" match="greaterOrEqual"/>
    </requires>
