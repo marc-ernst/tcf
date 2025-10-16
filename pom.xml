@@ -28,6 +28,9 @@
         <module>plugins/org.eclipse.tcf.debug.ui</module>
         <module>plugins/org.eclipse.tcf.cdt.ui</module>
         <module>plugins/org.eclipse.tcf.rse</module>
+        <module>plugins/org.eclipse.tcf.terminal.control</module>
+        <module>plugins/org.eclipse.tcf.terminal.view.core</module>
+        <module>plugins/org.eclipse.tcf.terminal.view.ui</module>
 
         <module>features/org.eclipse.tcf.core.feature</module>
         <module>features/org.eclipse.tcf.core.sdk.feature</module>

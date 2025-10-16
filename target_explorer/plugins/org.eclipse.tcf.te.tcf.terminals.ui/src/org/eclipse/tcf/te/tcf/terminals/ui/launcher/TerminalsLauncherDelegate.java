@@ -28,16 +28,16 @@ import org.eclipse.tcf.te.tcf.terminals.core.interfaces.launcher.ITerminalsLaunc
 import org.eclipse.tcf.te.tcf.terminals.core.launcher.TerminalsLauncher;
 import org.eclipse.tcf.te.tcf.terminals.ui.connector.TerminalsSettings;
 import org.eclipse.tcf.te.tcf.terminals.ui.controls.TerminalsConfigurationPanel;
-import org.eclipse.tm.internal.terminal.provisional.api.ISettingsStore;
-import org.eclipse.tm.internal.terminal.provisional.api.ITerminalConnector;
-import org.eclipse.tm.internal.terminal.provisional.api.TerminalConnectorExtension;
-import org.eclipse.tm.terminal.view.core.interfaces.ITerminalService;
-import org.eclipse.tm.terminal.view.core.interfaces.constants.ITerminalsConnectorConstants;
-import org.eclipse.tm.terminal.view.ui.interfaces.IConfigurationPanel;
-import org.eclipse.tm.terminal.view.ui.interfaces.IConfigurationPanelContainer;
-import org.eclipse.tm.terminal.view.ui.interfaces.IMementoHandler;
-import org.eclipse.tm.terminal.view.ui.internal.SettingsStore;
-import org.eclipse.tm.terminal.view.ui.launcher.AbstractLauncherDelegate;
+import org.eclipse.tcf.terminal.internal.provisional.api.ISettingsStore;
+import org.eclipse.tcf.terminal.internal.provisional.api.ITerminalConnector;
+import org.eclipse.tcf.terminal.internal.provisional.api.TerminalConnectorExtension;
+import org.eclipse.tcf.terminal.view.core.interfaces.ITerminalService;
+import org.eclipse.tcf.terminal.view.core.interfaces.constants.ITerminalsConnectorConstants;
+import org.eclipse.tcf.terminal.view.ui.interfaces.IConfigurationPanel;
+import org.eclipse.tcf.terminal.view.ui.interfaces.IConfigurationPanelContainer;
+import org.eclipse.tcf.terminal.view.ui.interfaces.IMementoHandler;
+import org.eclipse.tcf.terminal.view.ui.internal.SettingsStore;
+import org.eclipse.tcf.terminal.view.ui.launcher.AbstractLauncherDelegate;
 
 /**
  * Terminals (TCF) launcher delegate implementation.

@@ -1,0 +1,3 @@
+org.eclipse.tcf.terminal.control/debug/log = false
+org.eclipse.tcf.terminal.control/debug/log/char = false
+org.eclipse.tcf.terminal.control/debug/log/VT100Backend = false

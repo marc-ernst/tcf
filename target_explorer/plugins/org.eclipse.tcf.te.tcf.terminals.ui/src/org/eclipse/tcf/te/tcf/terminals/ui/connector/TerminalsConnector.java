@@ -15,10 +15,10 @@ import org.eclipse.tcf.protocol.Protocol;
 import org.eclipse.tcf.services.ITerminals;
 import org.eclipse.tcf.te.runtime.interfaces.IDisposable;
 import org.eclipse.tcf.te.tcf.terminals.core.launcher.TerminalsLauncher;
-import org.eclipse.tm.internal.terminal.provisional.api.ISettingsStore;
-import org.eclipse.tm.internal.terminal.provisional.api.ITerminalControl;
-import org.eclipse.tm.internal.terminal.provisional.api.TerminalState;
-import org.eclipse.tm.terminal.view.ui.streams.AbstractStreamsConnector;
+import org.eclipse.tcf.terminal.internal.provisional.api.ISettingsStore;
+import org.eclipse.tcf.terminal.internal.provisional.api.ITerminalControl;
+import org.eclipse.tcf.terminal.internal.provisional.api.TerminalState;
+import org.eclipse.tcf.terminal.view.ui.streams.AbstractStreamsConnector;
 
 /**
  * Terminals connector implementation.

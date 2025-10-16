@@ -65,10 +65,10 @@ import org.eclipse.tcf.te.tcf.processes.core.interfaces.launcher.IProcessLaunche
 import org.eclipse.tcf.te.tcf.processes.core.interfaces.launcher.IProcessStreamsProxy;
 import org.eclipse.tcf.te.tcf.processes.core.interfaces.tracing.ITraceIds;
 import org.eclipse.tcf.te.tcf.processes.core.nls.Messages;
-import org.eclipse.tm.terminal.view.core.TerminalServiceFactory;
-import org.eclipse.tm.terminal.view.core.interfaces.ITerminalService;
-import org.eclipse.tm.terminal.view.core.interfaces.ITerminalTabListener;
-import org.eclipse.tm.terminal.view.core.interfaces.constants.ITerminalsConnectorConstants;
+import org.eclipse.tcf.terminal.view.core.TerminalServiceFactory;
+import org.eclipse.tcf.terminal.view.core.interfaces.ITerminalService;
+import org.eclipse.tcf.terminal.view.core.interfaces.ITerminalTabListener;
+import org.eclipse.tcf.terminal.view.core.interfaces.constants.ITerminalsConnectorConstants;
 
 /**
  * Remote process launcher.
@@ -564,8 +564,8 @@ public class ProcessLauncher extends PlatformObject implements IProcessLauncher 
 				terminal.addTerminalTabListener(terminalTabListener);
 				// Create the terminal streams settings
 				Map<String, Object> props = new HashMap<String, Object>();
-				props.put(ITerminalsConnectorConstants.PROP_DELEGATE_ID, "org.eclipse.tm.terminal.connector.streams.launcher.streams"); //$NON-NLS-1$
-				props.put(ITerminalsConnectorConstants.PROP_ID, "org.eclipse.tm.terminal.view.ui.TerminalsView"); //$NON-NLS-1$
+				props.put(ITerminalsConnectorConstants.PROP_DELEGATE_ID, "org.eclipse.tcf.terminal.connector.streams.launcher.streams"); //$NON-NLS-1$
+				props.put(ITerminalsConnectorConstants.PROP_ID, "org.eclipse.tcf.terminal.view.ui.TerminalsView"); //$NON-NLS-1$
 				// Set the terminal tab title
 				String terminalTitle = properties.getStringProperty(ITerminalsConnectorConstants.PROP_TITLE);
 				if (terminalTitle == null) terminalTitle = getTerminalTitle();

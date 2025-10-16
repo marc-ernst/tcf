@@ -56,10 +56,10 @@ import org.eclipse.tcf.te.tcf.terminals.core.interfaces.launcher.ITerminalsConte
 import org.eclipse.tcf.te.tcf.terminals.core.interfaces.launcher.ITerminalsLauncher;
 import org.eclipse.tcf.te.tcf.terminals.core.interfaces.tracing.ITraceIds;
 import org.eclipse.tcf.te.tcf.terminals.core.nls.Messages;
-import org.eclipse.tm.terminal.view.core.TerminalServiceFactory;
-import org.eclipse.tm.terminal.view.core.interfaces.ITerminalService;
-import org.eclipse.tm.terminal.view.core.interfaces.ITerminalTabListener;
-import org.eclipse.tm.terminal.view.core.interfaces.constants.ITerminalsConnectorConstants;
+import org.eclipse.tcf.terminal.view.core.TerminalServiceFactory;
+import org.eclipse.tcf.terminal.view.core.interfaces.ITerminalService;
+import org.eclipse.tcf.terminal.view.core.interfaces.ITerminalTabListener;
+import org.eclipse.tcf.terminal.view.core.interfaces.constants.ITerminalsConnectorConstants;
 
 /**
  * Remote terminals launcher.

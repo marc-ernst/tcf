@@ -10,14 +10,10 @@
 <repository location="http://download.eclipse.org/eclipse/updates/4.8"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.egit.feature.group" version="5.0.0.201806131550-r"/>
-<repository location="http://download.eclipse.org/staging/photon"/>
-</location>
-<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.tm.terminal.connector.cdtserial.sdk.feature.feature.group" version="4.3.0.201803121138"/>
-<unit id="org.eclipse.tm.terminal.connector.remote.sdk.feature.feature.group" version="4.3.0.201803121138"/>
-<unit id="org.eclipse.tm.terminal.connector.serial.sdk.feature.feature.group" version="4.3.0.201803121138"/>
-<unit id="org.eclipse.tm.terminal.sdk.feature.feature.group" version="4.4.0.201803121138"/>
+<unit id="org.eclipse.tcf.terminal.connector.cdtserial.sdk.feature.feature.group" version="4.3.0.201803121138"/>
+<unit id="org.eclipse.tcf.terminal.connector.remote.sdk.feature.feature.group" version="4.3.0.201803121138"/>
+<unit id="org.eclipse.tcf.terminal.connector.serial.sdk.feature.feature.group" version="4.3.0.201803121138"/>
+<unit id="org.eclipse.tcf.terminal.sdk.feature.feature.group" version="4.4.0.201803121138"/>
 <repository location="http://download.eclipse.org/tm/terminal/updates/4.4milestones"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">

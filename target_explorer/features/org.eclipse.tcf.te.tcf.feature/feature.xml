@@ -62,7 +62,7 @@
       <import plugin="org.eclipse.tcf.te.ui.forms" version="1.9.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.tcf.te.ui.swt" version="1.9.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.tcf.te.ui.views" version="1.9.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.tm.terminal.view.core" version="4.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.tcf.terminal.view.core" version="4.0.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin

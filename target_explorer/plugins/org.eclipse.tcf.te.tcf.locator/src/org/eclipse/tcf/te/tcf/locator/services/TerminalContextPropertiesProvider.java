@@ -13,7 +13,7 @@ import java.util.Map;
 
 import org.eclipse.tcf.te.runtime.services.ServiceManager;
 import org.eclipse.tcf.te.runtime.services.interfaces.IPropertiesAccessService;
-import org.eclipse.tm.terminal.view.core.interfaces.ITerminalContextPropertiesProvider;
+import org.eclipse.tcf.terminal.view.core.interfaces.ITerminalContextPropertiesProvider;
 
 /**
  * Terminal context properties provider implementation.

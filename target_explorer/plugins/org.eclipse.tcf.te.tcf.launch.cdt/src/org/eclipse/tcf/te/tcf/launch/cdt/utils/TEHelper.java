@@ -65,8 +65,8 @@ import org.eclipse.tcf.te.tcf.locator.interfaces.services.IPeerModelLookupServic
 import org.eclipse.tcf.te.tcf.locator.model.ModelManager;
 import org.eclipse.tcf.te.tcf.processes.core.interfaces.launcher.IProcessLauncher;
 import org.eclipse.tcf.te.tcf.processes.core.launcher.ProcessLauncher;
-import org.eclipse.tm.terminal.view.core.interfaces.constants.ILineSeparatorConstants;
-import org.eclipse.tm.terminal.view.core.interfaces.constants.ITerminalsConnectorConstants;
+import org.eclipse.tcf.terminal.view.core.interfaces.constants.ILineSeparatorConstants;
+import org.eclipse.tcf.terminal.view.core.interfaces.constants.ITerminalsConnectorConstants;
 
 public class TEHelper {
 

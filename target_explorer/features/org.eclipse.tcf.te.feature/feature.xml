@@ -40,7 +40,9 @@
       <import plugin="org.eclipse.core.variables" version="3.2.600" match="greaterOrEqual"/>
       <import plugin="org.eclipse.help" version="3.6.0" match="greaterOrEqual"/>
       <import feature="org.eclipse.cdt.platform" version="8.3.0" match="greaterOrEqual"/>
-      <import feature="org.eclipse.tm.terminal.feature" version="4.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.tcf.terminal.control" version="4.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.tcf.terminal.view.core" version="4.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.tcf.terminal.view.ui" version="4.0.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.tcf.te.runtime" version="1.9.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.tcf.te.runtime.stepper" version="1.9.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.tcf.te.runtime.services" version="1.9.0" match="greaterOrEqual"/>

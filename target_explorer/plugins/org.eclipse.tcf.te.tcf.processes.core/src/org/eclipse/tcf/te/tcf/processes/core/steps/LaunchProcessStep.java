@@ -40,8 +40,8 @@ import org.eclipse.tcf.te.tcf.processes.core.activator.CoreBundleActivator;
 import org.eclipse.tcf.te.tcf.processes.core.interfaces.launcher.IProcessLauncher;
 import org.eclipse.tcf.te.tcf.processes.core.interfaces.steps.IProcessesStepAttributes;
 import org.eclipse.tcf.te.tcf.processes.core.launcher.ProcessLauncher;
-import org.eclipse.tm.terminal.view.core.interfaces.constants.ILineSeparatorConstants;
-import org.eclipse.tm.terminal.view.core.interfaces.constants.ITerminalsConnectorConstants;
+import org.eclipse.tcf.terminal.view.core.interfaces.constants.ILineSeparatorConstants;
+import org.eclipse.tcf.terminal.view.core.interfaces.constants.ITerminalsConnectorConstants;
 
 /**
  * Launch process step implementation.

@@ -11,14 +11,10 @@
 <repository location="http://download.eclipse.org/eclipse/updates/4.7"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.egit.feature.group" version="4.9.2.201712150930-r"/>
-<repository location="http://download.eclipse.org/releases/oxygen"/>
-</location>
-<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.tm.terminal.connector.cdtserial.sdk.feature.feature.group" version="4.3.0.201706140544"/>
-<unit id="org.eclipse.tm.terminal.connector.remote.sdk.feature.feature.group" version="4.3.0.201706140544"/>
-<unit id="org.eclipse.tm.terminal.connector.serial.sdk.feature.feature.group" version="4.3.0.201706140544"/>
-<unit id="org.eclipse.tm.terminal.sdk.feature.feature.group" version="4.3.0.201706140544"/>
+<unit id="org.eclipse.tcf.terminal.connector.cdtserial.sdk.feature.feature.group" version="4.3.0.201706140544"/>
+<unit id="org.eclipse.tcf.terminal.connector.remote.sdk.feature.feature.group" version="4.3.0.201706140544"/>
+<unit id="org.eclipse.tcf.terminal.connector.serial.sdk.feature.feature.group" version="4.3.0.201706140544"/>
+<unit id="org.eclipse.tcf.terminal.sdk.feature.feature.group" version="4.3.0.201706140544"/>
 <repository location="http://download.eclipse.org/tm/terminal/updates/4.3"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">

@@ -28,9 +28,9 @@ Import-Package: org.eclipse.tcf.core;version="1.7.0",
  org.eclipse.tcf.protocol;version="1.7.0",
  org.eclipse.tcf.services;version="1.7.0",
  org.eclipse.tcf.ssl;version="1.7.0",
- org.eclipse.tcf.util;version="1.7.0",
- org.eclipse.tm.internal.terminal.control,
- org.eclipse.tm.internal.terminal.provisional.api
+ org.eclipse.tcf.terminal.internal.control,
+ org.eclipse.tcf.terminal.internal.provisional.api,
+ org.eclipse.tcf.util;version="1.7.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Eclipse-LazyStart: true

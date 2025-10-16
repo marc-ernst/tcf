@@ -11,7 +11,7 @@ package org.eclipse.tcf.te.tcf.processes.core.launcher;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.PlatformObject;
-import org.eclipse.tm.terminal.view.core.interfaces.ITerminalTabListener;
+import org.eclipse.tcf.terminal.view.core.interfaces.ITerminalTabListener;
 
 /**
  * Remote process launcher terminal tab listener implementation.
