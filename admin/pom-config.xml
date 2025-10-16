@@ -4,10 +4,6 @@
     xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <modelVersion>4.0.0</modelVersion>
 
-    <prerequisites>
-        <maven>3.0</maven>
-    </prerequisites>
-
     <groupId>org.eclipse.tcf</groupId>
     <artifactId>org.eclipse.tcf.maven-config</artifactId>
     <version>1.9.0-SNAPSHOT</version>
@@ -165,10 +161,6 @@
                 <tm-site>https://archive.eclipse.org/tm/updates/4.2</tm-site>
             </properties>
 
-            <!-- Workaround for CDT release problem:
-                Missing requirement: org.eclipse.cdt.debug.core 8.1.0.201612061315 requires
-                'bundle org.eclipse.launchbar.core 2.0.0' but it could not be found
-            -->
             <repositories>
                 <repository>
                     <id>cdt-launchbar</id>
@@ -179,7 +171,7 @@
         </profile>
 
         <profile>
-            <!-- Eclipse 4.7 (Oxygen), CDT 9.3 -->
+            <!-- Eclipse 4.7 (Oxygen), CDT 9.3.3 -->
             <id>oxygen</id>
 
             <properties>
@@ -187,13 +179,9 @@
                 <orbit-site>https://download.eclipse.org/tools/orbit/downloads/drops/R20170516192513/repository</orbit-site>
                 <cdt-site>https://archive.eclipse.org/tools/cdt/releases/9.3/cdt9.3.3</cdt-site>
                 <terminal-site>https://download.eclipse.org/tm/terminal/updates/4.3</terminal-site>
-                <tm-site>https://download.eclipse.org/tm/updates/4.3milestones</tm-site>
+                <tm-site>https://archive.eclipse.org/tm/updates/4.2</tm-site>
             </properties>
 
-            <!-- Workaround for CDT release problem:
-                Missing requirement: org.eclipse.cdt.debug.core 8.2.0.201710130142 requires
-                'bundle org.eclipse.launchbar.core 2.0.0' but it could not be found
-            -->
             <repositories>
                 <repository>
                     <id>cdt-launchbar</id>
@@ -204,7 +192,7 @@
         </profile>
 
         <profile>
-            <!-- Eclipse 4.8 (Photon), CDT 9.4 -->
+            <!-- Eclipse 4.8 (Photon), CDT 9.4.3 -->
             <id>photon</id>
 
             <properties>
@@ -212,13 +200,9 @@
                 <orbit-site>https://download.eclipse.org/tools/orbit/downloads/drops/R20180606145124/repository</orbit-site>
                 <cdt-site>https://archive.eclipse.org/tools/cdt/releases/9.4/cdt-9.4.3</cdt-site>
                 <terminal-site>https://download.eclipse.org/tm/terminal/updates/4.4milestones</terminal-site>
-                <tm-site>https://download.eclipse.org/tm/updates/4.3milestones</tm-site>
+                <tm-site>https://archive.eclipse.org/tm/updates/4.2</tm-site>
             </properties>
 
-            <!-- Workaround for CDT release problem:
-                Missing requirement: org.eclipse.cdt.debug.core 8.3.0.201802261533 requires
-                'bundle org.eclipse.launchbar.core 2.0.0' but it could not be found
-            -->
             <repositories>
                 <repository>
                     <id>cdt-launchbar</id>
@@ -229,7 +213,7 @@
         </profile>
 
         <profile>
-            <!-- Eclipse 2018-09, CDT 9.5 -->
+            <!-- Eclipse 2018-09, CDT 9.5.5 -->
             <id>2018-09</id>
 
             <properties>
@@ -422,7 +406,7 @@
                     <configuration>
                         <sourceEncoding>utf-8</sourceEncoding>
                         <minimumTokens>100</minimumTokens>
-                        <targetJdk>1.7</targetJdk>
+                        <targetJdk>1.8</targetJdk>
                         <format>xml</format>
                         <failOnViolation>false</failOnViolation>
                         <excludes>
