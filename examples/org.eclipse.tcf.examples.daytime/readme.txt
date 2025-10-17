@@ -6,11 +6,11 @@ The example provides Java binding for DayTime service.
 The example is mainly meant for developer's educational use,
 DayTime service does not meant to be of any other value.
 
-See "org.eclipse.tcf.tcf.examples.daytime.agent" for details on extending TCF agent
+See "org.eclipse.tcf.examples.daytime.agent" for details on extending TCF agent
 with DayTime service implementation.
 
 The example includes:
 1. Definition of the service interface in Java: IDaytimeService.java
 2. Implementation of IDaytimeService interface that translates
    interface method calls to TCF messages: DaytimeServiceProxy.java
-3. Registration of the service using "org.eclipse.tcf.tcf.startup" extension point, see plugin.xml
+3. Registration of the service using "org.eclipse.tcf.startup" extension point, see plugin.xml
