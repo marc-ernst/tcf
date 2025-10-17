@@ -779,22 +779,7 @@ public class LocatorService implements ILocator {
     private HashSet<SubNet> getSubNetList() {
         HashSet<SubNet> set = new HashSet<SubNet>();
         try {
-            String osname = System.getProperty("os.name", "");
-            String java_version = System.getProperty("java.version", "");
-            if (osname.startsWith("Windows") && (java_version.startsWith("1.6.") || java_version.startsWith("1.7."))) {
-                /*
-                 * Workaround for JVM bug:
-                 * InterfaceAddress.getNetworkPrefixLength() does not conform to Javadoc
-                 * http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=6707289
-                 *
-                 * The bug shows up only on Windows when IPv6 is enabled.
-                 * The bug is supposed to be fixed in Java 1.7.
-                 */
-                getWindowsSubNetList(set);
-            }
-            else {
                 getSubNetList(set);
-            }
         }
         catch (Exception x) {
             log("Cannot get list of network interfaces", x);
@@ -833,93 +818,6 @@ public class LocatorService implements ILocator {
                 }
             }
         }
-    }
-
-    /**
-     * Finds and adds Subnetworks to the
-     * @param set
-     * @throws Exception
-     */
-    private void getWindowsSubNetList(HashSet<SubNet> set) throws Exception {
-        HashMap<String,InetAddress> map = new HashMap<String,InetAddress>();
-        for (Enumeration<NetworkInterface> e = NetworkInterface.getNetworkInterfaces(); e.hasMoreElements();) {
-            NetworkInterface f = e.nextElement();
-            Enumeration<InetAddress> n = f.getInetAddresses();
-            while (n.hasMoreElements()) {
-                InetAddress addr = n.nextElement();
-                if (addr instanceof Inet4Address) {
-                    String s = addr.getHostAddress();
-                    if (s.startsWith("127.")) {
-                        byte[] buf = addr.getAddress();
-                        buf[1] = buf[2] = buf[3] = (byte)255;
-                        set.add(new SubNet(8, addr, InetAddress.getByAddress(buf)));
-                    }
-                    else {
-                        map.put(s, addr);
-                    }
-                }
-            }
-        }
-        Process prs = Runtime.getRuntime().exec(new String[]{ "ipconfig", "/all" }, null);
-        BufferedReader inp = new BufferedReader(new InputStreamReader(prs.getInputStream()));
-        for (;;) {
-            String s = inp.readLine();
-            if (s == null) break;
-            int n = s.indexOf(" : ");
-            if (n < 0) continue;
-            n += 3;
-            int m = n;
-            while (m < s.length()) {
-                char ch = s.charAt(m);
-                if ((ch < '0' || ch > '9') && ch != '.') break;
-                m++;
-            }
-            if (m == n) continue;
-            InetAddress addr = map.get(s.substring(n, m));
-            if (addr == null) continue;
-            do s = inp.readLine();
-            while (s != null && s.length() == 0);
-            if (s == null) break;
-            n = s.indexOf(" : ");
-            if (n < 0) continue;
-            s = s.substring(n + 3);
-            int l = s.length();
-            int i_cnt = 0;
-            int d_cnt = 0;
-            for (int i = 0; i < l; i++) {
-                char ch = s.charAt(i);
-                if (ch == '.') d_cnt++;
-                else if (ch < '0' || ch > '9') i_cnt++;
-            }
-            if (d_cnt != 3 || i_cnt != 0) continue;
-            try {
-                byte[] buf = InetAddress.getByName(s).getAddress();
-                int prefix_length = 0;
-                for (int i = 0; i < 32; i++) {
-                    if ((buf[i / 8] & (1 << (7 - i % 8))) == 0) {
-                        prefix_length = i;
-                        break;
-                    }
-                }
-                if (prefix_length > 0) {
-                    buf = addr.getAddress();
-                    for (int i = prefix_length; i < 32; i++) {
-                        buf[i / 8] |=  1 << (7 - i % 8);
-                    }
-                    set.add(new SubNet(prefix_length, addr, InetAddress.getByAddress(buf)));
-                }
-            }
-            catch (Exception x) {
-            }
-        }
-        try {
-            prs.getErrorStream().close();
-            prs.getOutputStream().close();
-            inp.close();
-        }
-        catch (IOException x) {
-        }
-        prs.waitFor();
     }
 
     private byte[] getUTF8Bytes(String s) {
