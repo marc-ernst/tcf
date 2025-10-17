@@ -59,11 +59,11 @@
       <import plugin="org.eclipse.tcf.te.ui.views" version="1.9.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.tcf.te.ui.controls" version="1.9.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.tcf.te.runtime.concurrent" version="1.9.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.tcf.terminal.view.core" version="4.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.tcf.terminal.view.core" version="1.9.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.tcf.te.tcf.processes.core" version="1.9.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.tcf.te.tcf.terminals.core" version="1.9.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.tcf.terminal.control" version="4.0.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.tcf.terminal.view.ui" version="4.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.tcf.terminal.control" version="1.9.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.tcf.terminal.view.ui" version="1.9.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.tcf.te.tcf.core.scripting" version="1.9.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.tcf.te.tcf.log.core" version="1.9.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.tcf.te.tcf.ui.console" version="1.9.0" match="greaterOrEqual"/>

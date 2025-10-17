@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.tcf.terminal.view.ui;singleton:=true
-Bundle-Version: 4.2.100.qualifier
+Bundle-Version: 1.9.0.qualifier
 Bundle-Activator: org.eclipse.tcf.terminal.view.ui.activator.UIPlugin
 Bundle-Vendor: %providerName
 Require-Bundle: org.eclipse.core.expressions;bundle-version="3.4.400",
@@ -10,10 +10,10 @@ Require-Bundle: org.eclipse.core.expressions;bundle-version="3.4.400",
  org.eclipse.core.resources;bundle-version="3.8.1";resolution:=optional,
  org.eclipse.core.variables;bundle-version="3.2.600",
  org.eclipse.debug.ui;bundle-version="3.8.1";resolution:=optional,
- org.eclipse.tcf.terminal.view.core;bundle-version="4.0.0",
- org.eclipse.tcf.terminal.control;bundle-version="4.0.0",
+ org.eclipse.tcf.terminal.view.core;bundle-version="1.9.0",
+ org.eclipse.tcf.terminal.control;bundle-version="1.9.0",
  org.eclipse.ui;bundle-version="3.8.0"
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Bundle-Localization: plugin
 Export-Package: org.eclipse.tcf.terminal.view.ui.actions,
