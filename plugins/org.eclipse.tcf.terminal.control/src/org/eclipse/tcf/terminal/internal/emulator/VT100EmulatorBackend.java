@@ -77,14 +77,12 @@ public class VT100EmulatorBackend implements IVT100EmulatorBackend {
     private int fCursorLine;
     /* true if last output occurred on rightmost column
      * and next output requires line wrap */
-    private boolean fWrapPending;
     private boolean fInsertMode;
     private Style fDefaultStyle;
     private Style fStyle;
     int fLines;
     int fColumns;
     final private ITerminalTextData fTerminal;
-    private boolean fVT100LineWrapping;
     private ScrollRegion fScrollRegion = ScrollRegion.FULL_WINDOW;
 
     public VT100EmulatorBackend(ITerminalTextData terminal) {
@@ -320,25 +318,13 @@ public class VT100EmulatorBackend implements IVT100EmulatorBackend {
             int line=toAbsoluteLine(fCursorLine);
             int i=0;
             while (i < chars.length) {
-                if(fWrapPending) {
+                if(fCursorColumn >= fColumns) {
                     line = doLineWrap();
                 }
                 int n=Math.min(fColumns-fCursorColumn,chars.length-i);
                 fTerminal.setChars(line, fCursorColumn, chars, i, n, fStyle);
-                int col=fCursorColumn+n;
+                setCursorColumn(fCursorColumn+n);
                 i+=n;
-                // wrap needed?
-                if(col == fColumns) {
-                    if (fVT100LineWrapping) {
-                        // deferred line wrapping (eat_newline_glitch)
-                        setCursorColumn(col - 1);
-                        fWrapPending = true;
-                    } else {
-                        line = doLineWrap();
-                    }
-                } else {
-                    setCursorColumn(col);
-                }
             }
         }
     }
@@ -412,7 +398,6 @@ public class VT100EmulatorBackend implements IVT100EmulatorBackend {
             else if(targetColumn>=fColumns)
                 targetColumn=fColumns-1;
             fCursorColumn=targetColumn;
-            fWrapPending = false;
             // We make the assumption that nobody is changing the
             // terminal cursor except this class!
             // This assumption gives a huge performance improvement
@@ -453,14 +438,6 @@ public class VT100EmulatorBackend implements IVT100EmulatorBackend {
         synchronized (fTerminal) {
             return fColumns;
         }
-    }
-
-    public void setVT100LineWrapping(boolean enable) {
-        fVT100LineWrapping = enable;
-    }
-
-    public boolean isVT100LineWrapping() {
-        return fVT100LineWrapping;
     }
 
     public void setInsertMode(boolean enable) {

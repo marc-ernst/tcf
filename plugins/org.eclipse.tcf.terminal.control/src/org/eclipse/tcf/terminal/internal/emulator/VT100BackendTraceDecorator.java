@@ -144,15 +144,6 @@ public class VT100BackendTraceDecorator implements IVT100EmulatorBackend {
         fBackend.setStyle(style);
     }
 
-    public void setVT100LineWrapping(boolean enable) {
-        fWriter.println("setVT100LineWrapping("+enable+")"); //$NON-NLS-1$ //$NON-NLS-2$
-        fBackend.setVT100LineWrapping(enable);
-    }
-
-    public boolean isVT100LineWrapping() {
-        return fBackend.isVT100LineWrapping();
-    }
-
     public void setInsertMode(boolean enable) {
         fWriter.println("setInsertMode("+enable+")"); //$NON-NLS-1$ //$NON-NLS-2$
         fBackend.setInsertMode(enable);

@@ -1387,16 +1387,6 @@ public class VT100TerminalControl implements ITerminalControlForText, ITerminalC
     }
 
     @Override
-    public void setVT100LineWrapping(boolean enable) {
-        getTerminalText().setVT100LineWrapping(enable);
-    }
-
-    @Override
-    public boolean isVT100LineWrapping() {
-        return getTerminalText().isVT100LineWrapping();
-    }
-
-    @Override
     public void enableApplicationCursorKeys(boolean enable) {
         fApplicationCursorKeys = enable;
     }

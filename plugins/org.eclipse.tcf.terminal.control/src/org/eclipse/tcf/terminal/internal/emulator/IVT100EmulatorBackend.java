@@ -176,22 +176,6 @@ public interface IVT100EmulatorBackend {
     int getColumns();
 
     /**
-     * Enables VT100 line wrapping mode (default is off).
-     * This corresponds to the VT100 'eat_newline_glitch' terminal capability.
-     * If enabled, writing to the rightmost column does not cause
-     * an immediate wrap to the next line. Instead the line wrap occurs on the
-     * next output character.
-     *
-     * @param enable  whether to enable or disable VT100 line wrapping mode
-     */
-    void setVT100LineWrapping(boolean enable);
-
-    /**
-     * @return whether VT100 line wrapping mode is enabled
-     */
-    boolean isVT100LineWrapping();
-
-    /**
      * Enables/disables insert mode (IRM).
      *
      * @param enable  whether to enable insert mode

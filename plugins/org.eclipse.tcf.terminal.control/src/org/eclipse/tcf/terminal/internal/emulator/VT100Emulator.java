@@ -78,10 +78,16 @@ public class VT100Emulator implements ControlListener {
     private static final int ANSISTATE_EXPECTING_DEC_PRIVATE_COMMAND = 4;
 
     /**
+     * This is a character processing state: We've seen a '[>' after an escape
+     * character. Expecting a parameter character or a command character next.
+     */
+    private static final int ANSISTATE_EXPECTING_XTMODKEYS_COMMAND = 5;
+
+    /**
      * This is a character processing state: We've seen one of ()*+-./ after an escape
      * character. Expecting a character set designation character.
      */
-    private static final int ANSISTATE_EXPECTING_CHARSET_DESIGNATION = 5;
+    private static final int ANSISTATE_EXPECTING_CHARSET_DESIGNATION = 6;
 
 
     /**
@@ -114,6 +120,12 @@ public class VT100Emulator implements ControlListener {
      * "ESC 7" and "ESC 8" command sequences.
      */
     private int savedCursorColumn = 0;
+
+    /**
+     * This field hold the saved style of the cursor when processing the
+     * "ESC 7" and "ESC 8" command sequences.
+     */
+    private Style savedCursorStyle = null;
 
     /**
      * This field holds an array of StringBuffer objects, each of which is one
@@ -158,7 +170,7 @@ public class VT100Emulator implements ControlListener {
             text=new VT100EmulatorBackend(data);
 
 //      text.setDimensions(24, 80);
-        Style  style=Style.getStyle("BLACK", "WHITE"); //$NON-NLS-1$ //$NON-NLS-2$
+        Style style = Style.getStyle("BLACK", "WHITE"); //$NON-NLS-1$ //$NON-NLS-2$
         text.setDefaultStyle(style);
         text.setStyle(style);
     }
@@ -363,6 +375,7 @@ public class VT100Emulator implements ControlListener {
                     ansiState = ANSISTATE_INITIAL;
                     savedCursorLine = relativeCursorLine();
                     savedCursorColumn = getCursorColumn();
+                    savedCursorStyle = text.getStyle();
                     break;
 
                 case '8':
@@ -371,6 +384,7 @@ public class VT100Emulator implements ControlListener {
 
                     ansiState = ANSISTATE_INITIAL;
                     moveCursor(savedCursorLine, savedCursorColumn);
+                    text.setStyle(savedCursorStyle);
                     break;
 
                 case 'c':
@@ -390,6 +404,10 @@ public class VT100Emulator implements ControlListener {
             case ANSISTATE_EXPECTING_PARAMETER_OR_COMMAND:
                 if (character == '?') {
                     ansiState = ANSISTATE_EXPECTING_DEC_PRIVATE_COMMAND;
+                    break;
+                }
+                if (character == '>') {
+                    ansiState = ANSISTATE_EXPECTING_XTMODKEYS_COMMAND;
                     break;
                 }
 
@@ -424,6 +442,16 @@ public class VT100Emulator implements ControlListener {
                         || (character >= 'a' && character <= 'z')) {
                     ansiState = ANSISTATE_INITIAL;
                     processDecPrivateCommandCharacter(character);
+                } else {
+                    processAnsiParameterCharacter(character);
+                }
+                break;
+
+            case ANSISTATE_EXPECTING_XTMODKEYS_COMMAND:
+                if (character == '@' || (character >= 'A' && character <= 'Z')
+                        || (character >= 'a' && character <= 'z')) {
+                    ansiState = ANSISTATE_INITIAL;
+                    processXtModKeysCommandCharacter(character);
                 } else {
                     processAnsiParameterCharacter(character);
                 }
@@ -635,6 +663,17 @@ public class VT100Emulator implements ControlListener {
                     commandCharacter + "'"); //$NON-NLS-1$
             break;
         }
+    }
+
+    /**
+     * This method dispatches control to various processing methods based on the
+     * command character found in the most recently received XTMODKEYS escape
+     * sequence. This method only handles command characters that follow the
+     * control sequence CSI >
+     */
+    private void processXtModKeysCommandCharacter(char commandCharacter) {
+        Logger.log("Ignoring unsupported XTMODKEYS command character: '" + //$NON-NLS-1$
+                commandCharacter + "'"); //$NON-NLS-1$
     }
 
     /**
@@ -1049,9 +1088,20 @@ public class VT100Emulator implements ControlListener {
             break;
         case 47:
         case 1047:
+            // Use Alternate Screen Buffer (ignored).
+            break;
         case 1048:
+            // Saves the cursor position, encoding shift state and formatting attributes
+            savedCursorLine = relativeCursorLine();
+            savedCursorColumn = getCursorColumn();
+            savedCursorStyle = text.getStyle();
+            break;
         case 1049:
             // Use Alternate Screen Buffer (ignored).
+            // Saves the cursor position, encoding shift state and formatting attributes
+            savedCursorLine = relativeCursorLine();
+            savedCursorColumn = getCursorColumn();
+            savedCursorStyle = text.getStyle();
             break;
         default:
             Logger.log("Unsupported command parameter: CSI ?" + param + 'h'); //$NON-NLS-1$
@@ -1068,10 +1118,16 @@ public class VT100Emulator implements ControlListener {
             break;
         case 47:
         case 1047:
-        case 1048:
-        case 1049:
-            // Use Normal Screen Buffer (ignored, but reset scroll region).
             text.setScrollRegion(-1, -1);
+            break;
+        case 1048:
+            //moveCursor(savedCursorLine, savedCursorColumn);
+            text.setStyle(savedCursorStyle);
+            break;
+        case 1049:
+            text.setScrollRegion(-1, -1);
+            //moveCursor(savedCursorLine, savedCursorColumn);
+            text.setStyle(savedCursorStyle);
             break;
         default:
             Logger.log("Unsupported command parameter: CSI ?" + param + 'l'); //$NON-NLS-1$
@@ -1386,11 +1442,5 @@ public class VT100Emulator implements ControlListener {
     }
     public void setCrAfterNewLine(boolean crAfterNewLine) {
         fCrAfterNewLine = crAfterNewLine;
-    }
-    void setVT100LineWrapping(boolean enable) {
-        text.setVT100LineWrapping(enable);
-    }
-    boolean isVT100LineWrapping() {
-        return text.isVT100LineWrapping();
     }
 }
