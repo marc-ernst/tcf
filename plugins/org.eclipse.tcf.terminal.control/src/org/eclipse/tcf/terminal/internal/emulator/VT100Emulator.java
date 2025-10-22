@@ -150,6 +150,7 @@ public class VT100Emulator implements ControlListener {
     Reader fReader;
 
     boolean fCrAfterNewLine;
+
     /**
      * The constructor.
      */
@@ -246,22 +247,23 @@ public class VT100Emulator implements ControlListener {
         if (text != null)
             adjustTerminalDimensions();
     }
-//  /**
-//   * This method executes in the Display thread to process data received from
-//   * the remote host by class {@link org.eclipse.tcf.internal.terminal.telnet.TelnetConnection} and
-//   * other implementors of {@link ITerminalConnector}, like the
-//   * SerialPortHandler.
-//   * <p>
-//   * These connectors write text to the terminal's buffer through
-//   * {@link TerminalControl#writeToTerminal(String)} and then have
-//   * this run method executed in the display thread. This method
-//   * must not execute at the same time as methods
-//   * {@link #setNewText(StringBuffer)} and {@link #clearTerminal()}.
-//   * <p>
-//   * IMPORTANT: This method must be called in strict alternation with method
-//   * {@link #setNewText(StringBuffer)}.
-//   * <p>
-//   */
+
+    /**
+     * This method executes in the Display thread to process data received from
+     * the remote host by class {@link org.eclipse.tcf.internal.terminal.telnet.TelnetConnection} and
+     * other implementors of {@link ITerminalConnector}, like the
+     * SerialPortHandler.
+     * <p>
+     * These connectors write text to the terminal's buffer through
+     * {@link TerminalControl#writeToTerminal(String)} and then have
+     * this run method executed in the display thread. This method
+     * must not execute at the same time as methods
+     * {@link #setNewText(StringBuffer)} and {@link #clearTerminal()}.
+     * <p>
+     * IMPORTANT: This method must be called in strict alternation with method
+     * {@link #setNewText(StringBuffer)}.
+     * <p>
+     */
     public void processText() {
         try {
             // Find the width and height of the terminal, and resize it to display an
@@ -285,6 +287,7 @@ public class VT100Emulator implements ControlListener {
             Logger.logException(ex);
         }
     }
+
     /**
      * This method scans the newly received text, processing ANSI control
      * characters and escape sequences and displaying normal text.
@@ -325,6 +328,14 @@ public class VT100Emulator implements ControlListener {
 
                 case '\r':
                     processCarriageReturn(); // Carriage Return (Control-M)
+                    break;
+
+                case '\u000e':
+                    // Shift Out / SO: invokes the G1 character set.
+                    break;
+
+                case '\u000f':
+                    // Shift In / SI: invokes the G0 character set.
                     break;
 
                 case '\u001b':
@@ -387,6 +398,41 @@ public class VT100Emulator implements ControlListener {
                     text.setStyle(savedCursorStyle);
                     break;
 
+                case 'D':
+                case '9':
+                    // Index: moves the cursor down one line, in the same column.
+                    // If the cursor is already at the bottom of a defined scrolling region, the entire page scrolls up one line.
+                    ansiState = ANSISTATE_INITIAL;
+                    if (relativeCursorLine() == text.getLines() - 1) text.scrollUp(1);
+                    else moveCursor(relativeCursorLine() + 1, getCursorColumn());
+                    break;
+
+                case 'E':
+                    // Next Line: moves the cursor to the beginning of the next line.
+                    // If the cursor is already at the bottom of a defined scrolling region, the entire page scrolls up one line.
+                    ansiState = ANSISTATE_INITIAL;
+                    if (relativeCursorLine() == text.getLines() - 1) {
+                        text.scrollUp(1);
+                        moveCursor(relativeCursorLine(), 0);
+                    }
+                    else moveCursor(relativeCursorLine() + 1, 0);
+                    break;
+
+                case 'F':
+                    // Cursor to lower left corner of screen.
+                    ansiState = ANSISTATE_INITIAL;
+                    moveCursor(text.getLines() - 1, 0);
+                    break;
+
+                case 'M':
+                case '6':
+                    // Reverse Index: moves the cursor up one line, in the same column.
+                    // If the cursor is already at the top of a defined scrolling region, the entire page scrolls down one line.
+                    ansiState = ANSISTATE_INITIAL;
+                    if (relativeCursorLine() == 0) text.scrollDown(1);
+                    else moveCursor(relativeCursorLine() - 1, getCursorColumn());
+                    break;
+
                 case 'c':
                     // Reset the terminal
                     ansiState = ANSISTATE_INITIAL;
@@ -394,8 +440,7 @@ public class VT100Emulator implements ControlListener {
                     break;
 
                 default:
-                    Logger
-                            .log("Unsupported escape sequence: escape '" + character + "'"); //$NON-NLS-1$ //$NON-NLS-2$
+                    Logger.log("Unsupported escape sequence: escape '" + character + "'"); //$NON-NLS-1$ //$NON-NLS-2$
                     ansiState = ANSISTATE_INITIAL;
                     break;
                 }
@@ -474,6 +519,7 @@ public class VT100Emulator implements ControlListener {
             }
         }
     }
+
     private void resetTerminal() {
         text.eraseAll();
         text.setCursor(0, 0);
@@ -482,6 +528,7 @@ public class VT100Emulator implements ControlListener {
         text.setInsertMode(false);
         terminal.enableApplicationCursorKeys(false);
     }
+
     /**
      * This method is called when we have parsed an OS Command escape sequence.
      * The only one we support is "\e]0;...\u0007", which sets the terminal
@@ -1182,6 +1229,7 @@ public class VT100Emulator implements ControlListener {
                 ansiParameters[nextAnsiParameter].append(ch);
         }
     }
+
     /**
      * This method processes a contiguous sequence of non-control characters.
      * This is a performance optimization, so that we don't have to insert or
@@ -1304,9 +1352,6 @@ public class VT100Emulator implements ControlListener {
         // Compute how many pixels we need to shrink the StyledText control vertically
         // to make it display an integral number of lines of text.
 
-        // TODO
-//      if(text.getColumns()!=80 && text.getLines()!=80)
-//          text.setDimensions(24, 80);
         // If we are in a TELNET connection and we know the dimensions of the terminal,
         // we give the size information to the TELNET connection object so it can
         // communicate it to the TELNET server. If we are in a serial connection,
@@ -1384,6 +1429,7 @@ public class VT100Emulator implements ControlListener {
     private void moveCursorBackward(int columnsToMove) {
         moveCursor(relativeCursorLine(), getCursorColumn() - columnsToMove);
     }
+
     /**
      * Resets the state of the terminal text (foreground color, background color,
      * font style and other internal state). It essentially makes it ready for new input.
@@ -1405,22 +1451,20 @@ public class VT100Emulator implements ControlListener {
     private int fNextChar=-1;
 
     private char getNextChar() throws IOException {
-        int c=-1;
-        if(fNextChar!=-1) {
-            c= fNextChar;
+        int c = -1;
+        if (fNextChar!=-1) {
+            c = fNextChar;
             fNextChar=-1;
         } else {
             c = fReader.read();
         }
         // TODO: better end of file handling
-        if(c==-1)
-            c=0;
+        if (c == -1) c = 0;
         return (char)c;
     }
 
     private boolean hasNextChar() throws IOException  {
-        if(fNextChar>=0)
-            return true;
+        if (fNextChar>=0) return true;
         return fReader.ready();
     }
 
@@ -1434,12 +1478,15 @@ public class VT100Emulator implements ControlListener {
         //assert fNextChar!=-1: "Already a character waiting:"+fNextChar; //$NON-NLS-1$
         fNextChar=c;
     }
+
     private int getCursorColumn() {
         return text.getCursorColumn();
     }
+
     public boolean isCrAfterNewLine() {
         return fCrAfterNewLine;
     }
+
     public void setCrAfterNewLine(boolean crAfterNewLine) {
         fCrAfterNewLine = crAfterNewLine;
     }
