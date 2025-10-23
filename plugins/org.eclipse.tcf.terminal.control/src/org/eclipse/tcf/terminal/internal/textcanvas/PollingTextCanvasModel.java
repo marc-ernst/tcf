@@ -10,6 +10,7 @@
  * Anton Leherbauer (Wind River) - [420928] Terminal widget leaks memory
  *******************************************************************************/
 package org.eclipse.tcf.terminal.internal.textcanvas;
+
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.tcf.terminal.model.ITerminalTextDataSnapshot;
 
@@ -19,6 +20,7 @@ import org.eclipse.tcf.terminal.model.ITerminalTextDataSnapshot;
  */
 public class PollingTextCanvasModel extends AbstractTextCanvasModel {
     private static final int DEFAULT_POLL_INTERVAL = 50;
+
     int fPollInterval = -1;
 
     /**
@@ -28,17 +30,20 @@ public class PollingTextCanvasModel extends AbstractTextCanvasModel {
         super(snapshot);
         startPolling();
     }
+
     public void setUpdateInterval(int t) {
         fPollInterval = t;
     }
+
     public void stopPolling() {
         // timerExec only dispatches if the delay is >=0
         fPollInterval = -1;
     }
+
     public void startPolling() {
         if (fPollInterval < 0) {
             fPollInterval = DEFAULT_POLL_INTERVAL;
-            Display.getDefault().timerExec(fPollInterval, new Runnable(){
+            Display.getDefault().timerExec(fPollInterval, new Runnable() {
                 public void run() {
                     update();
                     Display.getDefault().timerExec(fPollInterval, this);

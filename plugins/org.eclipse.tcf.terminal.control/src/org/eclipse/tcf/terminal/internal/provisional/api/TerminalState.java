@@ -15,30 +15,31 @@ package org.eclipse.tcf.terminal.internal.provisional.api;
 /**
  * Represent the sate of a terminal connection.
  * In java 1.5 this would be an enum.
+ *
  * @author Michael Scharf
  *
- * <p>
- * <strong>EXPERIMENTAL</strong>. This class or interface has been added as
- * part of a work in progress. There is no guarantee that this API will
- * work or that it will remain the same. Please do not use this API without
- * consulting with the <a href="http://www.eclipse.org/tm/">Target Management</a> team.
- * </p>
+ *         <p>
+ *         <strong>EXPERIMENTAL</strong>. This class or interface has been added as
+ *         part of a work in progress. There is no guarantee that this API will
+ *         work or that it will remain the same. Please do not use this API without
+ *         consulting with the <a href="http://www.eclipse.org/tm/">Target Management</a> team.
+ *         </p>
  */
 public class TerminalState {
     /**
      * The terminal is not connected.
      */
-    public final static TerminalState CLOSED=new TerminalState("CLOSED"); //$NON-NLS-1$
+    public final static TerminalState CLOSED = new TerminalState("CLOSED"); //$NON-NLS-1$
 
     /**
      * The terminal is about to connect.
      */
-    public final static TerminalState CONNECTING=new TerminalState("CONNECTING..."); //$NON-NLS-1$
+    public final static TerminalState CONNECTING = new TerminalState("CONNECTING..."); //$NON-NLS-1$
 
     /**
      * The terminal is connected.
      */
-    public final static TerminalState CONNECTED=new TerminalState("CONNECTED"); //$NON-NLS-1$
+    public final static TerminalState CONNECTED = new TerminalState("CONNECTED"); //$NON-NLS-1$
 
     private final String fState;
 

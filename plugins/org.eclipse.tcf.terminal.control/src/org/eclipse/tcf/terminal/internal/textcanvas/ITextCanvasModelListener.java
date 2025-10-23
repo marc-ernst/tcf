@@ -14,7 +14,9 @@ package org.eclipse.tcf.terminal.internal.textcanvas;
  */
 public interface ITextCanvasModelListener {
     void rangeChanged(int col, int line, int width, int height);
+
     void dimensionsChanged(int cols, int rows);
+
     /**
      * Called when any text change happened. Used to scroll to the
      * end of text in auto scroll mode. This does not get fired

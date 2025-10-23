@@ -33,8 +33,7 @@ import org.eclipse.ui.IWorkbenchPreferencePage;
  * @noinstantiate This class is not intended to be instantiated by clients.
  * @noreference This class is not intended to be referenced by clients.
  */
-public class TerminalPreferencePage extends FieldEditorPreferencePage implements
-        IWorkbenchPreferencePage {
+public class TerminalPreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
     protected BooleanFieldEditor fInvertColors;
 
     protected IntegerFieldEditor fEditorBufferSize;
@@ -42,16 +41,20 @@ public class TerminalPreferencePage extends FieldEditorPreferencePage implements
     public TerminalPreferencePage() {
         super(GRID);
     }
+
     protected void createFieldEditors() {
         setupPage();
     }
+
     public void init(IWorkbench workbench) {
         // do nothing
     }
+
     protected void setupPage() {
         setupData();
         setupEditors();
     }
+
     protected void setupData() {
         TerminalPlugin plugin;
         IPreferenceStore preferenceStore;
@@ -60,12 +63,12 @@ public class TerminalPreferencePage extends FieldEditorPreferencePage implements
         preferenceStore = plugin.getPreferenceStore();
         setPreferenceStore(preferenceStore);
     }
+
     protected void setupEditors() {
-        fInvertColors = new BooleanFieldEditor(
-                ITerminalConstants.PREF_INVERT_COLORS, TerminalMessages.INVERT_COLORS,
+        fInvertColors = new BooleanFieldEditor(ITerminalConstants.PREF_INVERT_COLORS, TerminalMessages.INVERT_COLORS,
                 getFieldEditorParent());
-        fEditorBufferSize = new IntegerFieldEditor(ITerminalConstants.PREF_BUFFERLINES,
-                TerminalMessages.BUFFERLINES, getFieldEditorParent());
+        fEditorBufferSize = new IntegerFieldEditor(ITerminalConstants.PREF_BUFFERLINES, TerminalMessages.BUFFERLINES,
+                getFieldEditorParent());
 
         fEditorBufferSize.setValidRange(0, Integer.MAX_VALUE);
 

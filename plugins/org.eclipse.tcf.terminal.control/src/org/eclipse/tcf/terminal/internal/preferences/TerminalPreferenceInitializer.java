@@ -31,7 +31,7 @@ public class TerminalPreferenceInitializer extends AbstractPreferenceInitializer
     }
 
     public void initializeDefaultPreferences() {
-        //DefaultScope.INSTANCE was added in Eclipse 3.7
+        // DefaultScope.INSTANCE was added in Eclipse 3.7
         IEclipsePreferences defaultPrefs = DefaultScope.INSTANCE.getNode(TerminalPlugin.PLUGIN_ID);
         defaultPrefs.putBoolean(ITerminalConstants.PREF_INVERT_COLORS, ITerminalConstants.DEFAULT_INVERT_COLORS);
         defaultPrefs.putInt(ITerminalConstants.PREF_BUFFERLINES, ITerminalConstants.DEFAULT_BUFFERLINES);

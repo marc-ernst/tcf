@@ -34,16 +34,24 @@ public abstract class AbstractSettingsPage implements ISettingsPage, IMessagePro
     // Flag to control the control decorations
     private boolean hasDecoration = false;
 
-    /* (non-Javadoc)
-     * @see org.eclipse.tcf.internal.terminal.provisional.api.ISettingsPage#addListener(org.eclipse.tcf.internal.terminal.provisional.api.ISettingsPage.Listener)
+    /*
+     * (non-Javadoc)
+     *
+     * @see
+     * org.eclipse.tcf.internal.terminal.provisional.api.ISettingsPage#addListener(org.eclipse.tcf.internal.terminal.
+     * provisional.api.ISettingsPage.Listener)
      */
     public void addListener(Listener listener) {
         Assert.isNotNull(listener);
         listeners.add(listener);
     }
 
-    /* (non-Javadoc)
-     * @see org.eclipse.tcf.internal.terminal.provisional.api.ISettingsPage#removeListener(org.eclipse.tcf.internal.terminal.provisional.api.ISettingsPage.Listener)
+    /*
+     * (non-Javadoc)
+     *
+     * @see
+     * org.eclipse.tcf.internal.terminal.provisional.api.ISettingsPage#removeListener(org.eclipse.tcf.internal.terminal.
+     * provisional.api.ISettingsPage.Listener)
      */
     public void removeListener(Listener listener) {
         Assert.isNotNull(listener);
@@ -60,18 +68,22 @@ public abstract class AbstractSettingsPage implements ISettingsPage, IMessagePro
         for (int i = 0; i < list.length; i++) {
             Object l = list[i];
             if (!(l instanceof Listener)) continue;
-            ((Listener)l).onSettingsPageChanged(control);
+            ((Listener) l).onSettingsPageChanged(control);
         }
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     *
      * @see org.eclipse.jface.dialogs.IMessageProvider#getMessage()
      */
     public final String getMessage() {
         return message;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     *
      * @see org.eclipse.jface.dialogs.IMessageProvider#getMessageType()
      */
     public final int getMessageType() {
@@ -147,7 +159,7 @@ public abstract class AbstractSettingsPage implements ISettingsPage, IMessagePro
     protected final void updateControlDecoration(Control control, String message, int messageType) {
         Assert.isNotNull(control);
 
-        ControlDecoration controlDecoration = (ControlDecoration)control.getData("controlDecoration"); //$NON-NLS-1$
+        ControlDecoration controlDecoration = (ControlDecoration) control.getData("controlDecoration"); //$NON-NLS-1$
         if (controlDecoration != null) {
             // The description is the same as the message
             controlDecoration.setDescriptionText(message);
@@ -159,7 +171,8 @@ public abstract class AbstractSettingsPage implements ISettingsPage, IMessagePro
             String decorationId = FieldDecorationRegistry.DEC_INFORMATION;
             if (messageType == IMessageProvider.ERROR) {
                 decorationId = FieldDecorationRegistry.DEC_ERROR;
-            } else if (messageType == IMessageProvider.WARNING) {
+            }
+            else if (messageType == IMessageProvider.WARNING) {
                 decorationId = FieldDecorationRegistry.DEC_WARNING;
             }
 

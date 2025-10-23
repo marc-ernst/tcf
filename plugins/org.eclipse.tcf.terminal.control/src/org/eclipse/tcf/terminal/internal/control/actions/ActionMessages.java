@@ -21,14 +21,17 @@ import org.eclipse.osgi.util.NLS;
 
 public class ActionMessages extends NLS {
     static {
-        NLS.initializeMessages(ActionMessages.class.getName(),
-                ActionMessages.class);
+        NLS.initializeMessages(ActionMessages.class.getName(), ActionMessages.class);
     }
 
     public static String COPY;
+
     public static String CUT;
+
     public static String PASTE;
+
     public static String SELECTALL;
+
     public static String CLEARALL;
 
 }

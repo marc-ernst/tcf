@@ -40,7 +40,7 @@ public abstract class TerminalConnectorImpl {
      * done in this method rather than in the constructor.
      *
      * @throws Exception when the connector fails to initialize (due to missing
-     *             required libraries, for instance).
+     *         required libraries, for instance).
      */
     public void initialize() throws Exception {
     }
@@ -54,7 +54,7 @@ public abstract class TerminalConnectorImpl {
      * first thing they are doing.
      *
      * @param control Used to inform the UI about state changes and messages
-     *            from the connection.
+     *        from the connection.
      */
     public void connect(ITerminalControl control) {
         Logger.log("entered."); //$NON-NLS-1$
@@ -81,14 +81,14 @@ public abstract class TerminalConnectorImpl {
 
     /**
      * @return the terminal to remote stream (bytes written to this stream will
-     * be sent to the remote site). For the stream in the other direction (remote to
-     * terminal see {@link ITerminalControl#getRemoteToTerminalOutputStream()}
+     *         be sent to the remote site). For the stream in the other direction (remote to
+     *         terminal see {@link ITerminalControl#getRemoteToTerminalOutputStream()}
      */
     abstract public OutputStream getTerminalToRemoteStream();
 
     /**
      * @return A string that represents the settings of the connection. This representation
-     * may be shown in the status line of the terminal view.
+     *         may be shown in the status line of the terminal view.
      */
     abstract public String getSettingsSummary();
 
@@ -119,7 +119,7 @@ public abstract class TerminalConnectorImpl {
      * to load settings.
      *
      * @param store a string based data store. Short keys like "foo" can be used
-     *            to store the state of the connection.
+     *        to store the state of the connection.
      */
     public void load(ISettingsStore store) {
         // do nothing by default

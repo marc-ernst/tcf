@@ -19,25 +19,27 @@ import java.util.Map;
  * Threadsafe.
  */
 public class StyleColor {
-    private final static Map<String, StyleColor> fgStyleColors=new HashMap<String, StyleColor>();
+    private final static Map<String, StyleColor> fgStyleColors = new HashMap<String, StyleColor>();
+
     final String fName;
 
     /**
      * @param name the name of the color. It is up to the UI to associate a
-     * named color with a visual representation
+     *        named color with a visual representation
      * @return a StyleColor
      */
     public static StyleColor getStyleColor(String name) {
         StyleColor result;
         synchronized (fgStyleColors) {
-            result=fgStyleColors.get(name);
-            if(result==null) {
-                result=new StyleColor(name);
+            result = fgStyleColors.get(name);
+            if (result == null) {
+                result = new StyleColor(name);
                 fgStyleColors.put(name, result);
             }
         }
         return result;
     }
+
     // nobody except the factory method is allowed to instantiate this class!
     private StyleColor(String name) {
         fName = name;

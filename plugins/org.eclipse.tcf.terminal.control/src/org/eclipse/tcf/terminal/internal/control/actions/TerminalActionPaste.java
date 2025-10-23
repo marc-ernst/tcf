@@ -14,7 +14,8 @@
  * Michael Scharf (Wind River) - split into core, view and connector plugins
  * Martin Oberhuber (Wind River) - fixed copyright headers and beautified
  * Anna Dushistova (MontaVista) - [227537] moved actions from terminal.view to terminal plugin
- * Uwe Stieber (Wind River) - [260372] [terminal] Certain terminal actions are enabled if no target terminal control is available
+ * Uwe Stieber (Wind River) - [260372] [terminal] Certain terminal actions are enabled if no target terminal control is
+ * available
  * Uwe Stieber (Wind River) - [294719] [terminal] SWT Widget disposed in TerminalActionPaste
  * Martin Oberhuber (Wind River) - [296212] Cannot paste text into terminal on some Linux hosts
  *******************************************************************************/
@@ -31,22 +32,18 @@ public class TerminalActionPaste extends AbstractTerminalAction {
         super(TerminalActionPaste.class.getName());
         setActionDefinitionId("org.eclipse.tcf.terminal.paste"); //$NON-NLS-1$
         ISharedImages si = PlatformUI.getWorkbench().getSharedImages();
-        setupAction(ActionMessages.PASTE, ActionMessages.PASTE,
-                    si.getImageDescriptor(ISharedImages.IMG_TOOL_PASTE),
-                    si.getImageDescriptor(ISharedImages.IMG_TOOL_PASTE),
-                    si.getImageDescriptor(ISharedImages.IMG_TOOL_PASTE_DISABLED),
-                    false);
+        setupAction(ActionMessages.PASTE, ActionMessages.PASTE, si.getImageDescriptor(ISharedImages.IMG_TOOL_PASTE),
+                si.getImageDescriptor(ISharedImages.IMG_TOOL_PASTE),
+                si.getImageDescriptor(ISharedImages.IMG_TOOL_PASTE_DISABLED), false);
     }
 
     public TerminalActionPaste(ITerminalViewControl target) {
         super(target, TerminalActionPaste.class.getName());
         setActionDefinitionId("org.eclipse.tcf.terminal.paste"); //$NON-NLS-1$
         ISharedImages si = PlatformUI.getWorkbench().getSharedImages();
-        setupAction(ActionMessages.PASTE, ActionMessages.PASTE,
-                    si.getImageDescriptor(ISharedImages.IMG_TOOL_PASTE),
-                    si.getImageDescriptor(ISharedImages.IMG_TOOL_PASTE),
-                    si.getImageDescriptor(ISharedImages.IMG_TOOL_PASTE_DISABLED),
-                    false);
+        setupAction(ActionMessages.PASTE, ActionMessages.PASTE, si.getImageDescriptor(ISharedImages.IMG_TOOL_PASTE),
+                si.getImageDescriptor(ISharedImages.IMG_TOOL_PASTE),
+                si.getImageDescriptor(ISharedImages.IMG_TOOL_PASTE_DISABLED), false);
     }
 
     public void run() {
@@ -60,8 +57,7 @@ public class TerminalActionPaste extends AbstractTerminalAction {
         ITerminalViewControl target = getTarget();
         boolean bEnabled = target != null && target.getClipboard() != null && !target.getClipboard().isDisposed();
         if (bEnabled) {
-            String strText = (String) target.getClipboard().getContents(
-                    TextTransfer.getInstance());
+            String strText = (String) target.getClipboard().getContents(TextTransfer.getInstance());
             bEnabled = ((strText != null) && (!strText.equals("")) && (target.getState() == TerminalState.CONNECTED));//$NON-NLS-1$
         }
         setEnabled(bEnabled);

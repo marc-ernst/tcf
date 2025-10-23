@@ -25,8 +25,10 @@ public interface ICommandInputField {
     void createControl(Composite parent, ITerminalViewControl terminal);
 
     void dispose();
+
     /**
      * Sets the font of a control created with {@link #createControl(Composite, ITerminalViewControl)}
+     *
      * @param control
      * @param font the new text font
      */

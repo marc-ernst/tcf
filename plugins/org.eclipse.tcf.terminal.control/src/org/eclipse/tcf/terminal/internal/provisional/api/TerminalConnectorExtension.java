@@ -28,30 +28,30 @@ import org.eclipse.tcf.terminal.internal.provisional.api.provider.TerminalConnec
  * @noextend This class is not intended to be subclassed by clients.
  * @noinstantiate This class is not intended to be instantiated by clients.
  *
- * <p>
- * <strong>EXPERIMENTAL</strong>. This class or interface has been added as
- * part of a work in progress. There is no guarantee that this API will work or
- * that it will remain the same. Please do not use this API without consulting
- * with the <a href="http://www.eclipse.org/tm/">Target Management</a>
- * team.
- * </p>
+ *                <p>
+ *                <strong>EXPERIMENTAL</strong>. This class or interface has been added as
+ *                part of a work in progress. There is no guarantee that this API will work or
+ *                that it will remain the same. Please do not use this API without consulting
+ *                with the <a href="http://www.eclipse.org/tm/">Target Management</a>
+ *                team.
+ *                </p>
  */
 public class TerminalConnectorExtension {
     static private ITerminalConnector makeConnector(final IConfigurationElement config) {
         String id = config.getAttribute("id"); //$NON-NLS-1$
-        if(id==null || id.length()==0)
-            id=config.getAttribute("class"); //$NON-NLS-1$
-        String name= config.getAttribute("name"); //$NON-NLS-1$
-        if(name==null || name.length()==0) {
-            name=id;
+        if (id == null || id.length() == 0) id = config.getAttribute("class"); //$NON-NLS-1$
+        String name = config.getAttribute("name"); //$NON-NLS-1$
+        if (name == null || name.length() == 0) {
+            name = id;
         }
         String hidden = config.getAttribute("hidden"); //$NON-NLS-1$
         boolean isHidden = hidden != null ? new Boolean(hidden).booleanValue() : false;
-        TerminalConnector.Factory factory=new TerminalConnector.Factory(){
+        TerminalConnector.Factory factory = new TerminalConnector.Factory() {
             public TerminalConnectorImpl makeConnector() throws Exception {
-                return (TerminalConnectorImpl)config.createExecutableExtension("class"); //$NON-NLS-1$
-            }};
-        return new TerminalConnector(factory,id,name, isHidden);
+                return (TerminalConnectorImpl) config.createExecutableExtension("class"); //$NON-NLS-1$
+            }
+        };
+        return new TerminalConnector(factory, id, name, isHidden);
     }
 
     /**
@@ -59,21 +59,23 @@ public class TerminalConnectorExtension {
      * terminal connector is not yet instantiated to any real connection.
      *
      * @param id the id of the terminal connector in the
-     *            <code>org.eclipse.tcf.terminal.control.connectors</code>
-     *            extension point
+     *        <code>org.eclipse.tcf.terminal.control.connectors</code>
+     *        extension point
      * @return a new ITerminalConnector with id or <code>null</code> if there
      *         is no extension with that id.
      * @since org.eclipse.tcf.terminal 2.0
      */
     public static ITerminalConnector makeTerminalConnector(String id) {
-        IConfigurationElement[] config = RegistryFactory.getRegistry().getConfigurationElementsFor("org.eclipse.tcf.terminal.control.connectors"); //$NON-NLS-1$
+        IConfigurationElement[] config = RegistryFactory.getRegistry()
+                .getConfigurationElementsFor("org.eclipse.tcf.terminal.control.connectors"); //$NON-NLS-1$
         for (int i = 0; i < config.length; i++) {
-            if(id.equals(config[i].getAttribute("id"))) { //$NON-NLS-1$
+            if (id.equals(config[i].getAttribute("id"))) { //$NON-NLS-1$
                 return makeConnector(config[i]);
             }
         }
         return null;
     }
+
     /**
      * Return a list of available terminal connectors (connection types).
      *
@@ -87,8 +89,9 @@ public class TerminalConnectorExtension {
      * @since org.eclipse.tcf.terminal 2.0 return value is ITerminalConnector[]
      */
     public static ITerminalConnector[] makeTerminalConnectors() {
-        IConfigurationElement[] config = RegistryFactory.getRegistry().getConfigurationElementsFor("org.eclipse.tcf.terminal.control.connectors"); //$NON-NLS-1$
-        List<ITerminalConnector> result=new ArrayList<ITerminalConnector>();
+        IConfigurationElement[] config = RegistryFactory.getRegistry()
+                .getConfigurationElementsFor("org.eclipse.tcf.terminal.control.connectors"); //$NON-NLS-1$
+        List<ITerminalConnector> result = new ArrayList<ITerminalConnector>();
         for (int i = 0; i < config.length; i++) {
             result.add(makeConnector(config[i]));
         }

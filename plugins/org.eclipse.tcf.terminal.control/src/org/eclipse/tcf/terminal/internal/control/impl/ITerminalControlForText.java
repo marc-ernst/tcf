@@ -19,13 +19,16 @@ import org.eclipse.tcf.terminal.internal.provisional.api.TerminalState;
 
 /**
  * need a better name!
+ *
  * @author Michael Scharf
  *
  */
 public interface ITerminalControlForText {
 
     TerminalState getState();
+
     void setState(TerminalState state);
+
     void setTerminalTitle(String title);
 
     ITerminalConnector getTerminalConnector();
@@ -34,6 +37,7 @@ public interface ITerminalControlForText {
 
     /**
      * Enable/disable Application Cursor Keys mode (DECCKM)
+     *
      * @param enable
      */
     void enableApplicationCursorKeys(boolean enable);

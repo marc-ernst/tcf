@@ -13,7 +13,8 @@
  * Contributors:
  * Michael Scharf (Wind River) - split into core, view and connector plugins
  * Martin Oberhuber (Wind River) - fixed copyright headers and beautified
- * Uwe Stieber (Wind River) - [260372] [terminal] Certain terminal actions are enabled if no target terminal control is available
+ * Uwe Stieber (Wind River) - [260372] [terminal] Certain terminal actions are enabled if no target terminal control is
+ * available
  *******************************************************************************/
 package org.eclipse.tcf.terminal.internal.control.actions;
 
@@ -25,19 +26,17 @@ public class TerminalActionCut extends AbstractTerminalAction {
     public TerminalActionCut() {
         super(TerminalActionCut.class.getName());
         ISharedImages si = PlatformUI.getWorkbench().getSharedImages();
-        setupAction(ActionMessages.CUT, ActionMessages.CUT, si
-                .getImageDescriptor(ISharedImages.IMG_TOOL_CUT), si
-                .getImageDescriptor(ISharedImages.IMG_TOOL_CUT), si
-                .getImageDescriptor(ISharedImages.IMG_TOOL_CUT_DISABLED), true);
+        setupAction(ActionMessages.CUT, ActionMessages.CUT, si.getImageDescriptor(ISharedImages.IMG_TOOL_CUT),
+                si.getImageDescriptor(ISharedImages.IMG_TOOL_CUT),
+                si.getImageDescriptor(ISharedImages.IMG_TOOL_CUT_DISABLED), true);
     }
 
     public TerminalActionCut(ITerminalViewControl target) {
         super(target, TerminalActionCut.class.getName());
         ISharedImages si = PlatformUI.getWorkbench().getSharedImages();
-        setupAction(ActionMessages.CUT, ActionMessages.CUT, si
-                .getImageDescriptor(ISharedImages.IMG_TOOL_CUT), si
-                .getImageDescriptor(ISharedImages.IMG_TOOL_CUT), si
-                .getImageDescriptor(ISharedImages.IMG_TOOL_CUT_DISABLED), true);
+        setupAction(ActionMessages.CUT, ActionMessages.CUT, si.getImageDescriptor(ISharedImages.IMG_TOOL_CUT),
+                si.getImageDescriptor(ISharedImages.IMG_TOOL_CUT),
+                si.getImageDescriptor(ISharedImages.IMG_TOOL_CUT_DISABLED), true);
     }
 
     public void run() {

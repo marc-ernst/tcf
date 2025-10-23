@@ -14,7 +14,8 @@
  * Michael Scharf (Wind River) - split into core, view and connector plugins
  * Martin Oberhuber (Wind River) - fixed copyright headers and beautified
  * Anna Dushistova (MontaVista) - [227537] moved actions from terminal.view to terminal plugin
- * Uwe Stieber (Wind River) - [260372] [terminal] Certain terminal actions are enabled if no target terminal control is available
+ * Uwe Stieber (Wind River) - [260372] [terminal] Certain terminal actions are enabled if no target terminal control is
+ * available
  *******************************************************************************/
 package org.eclipse.tcf.terminal.internal.control.actions;
 
@@ -27,20 +28,18 @@ public class TerminalActionCopy extends AbstractTerminalAction {
         super(TerminalActionCopy.class.getName());
         setActionDefinitionId("org.eclipse.tcf.terminal.copy"); //$NON-NLS-1$
         ISharedImages si = PlatformUI.getWorkbench().getSharedImages();
-        setupAction(ActionMessages.COPY, ActionMessages.COPY, si
-                .getImageDescriptor(ISharedImages.IMG_TOOL_COPY), si
-                .getImageDescriptor(ISharedImages.IMG_TOOL_COPY), si
-                .getImageDescriptor(ISharedImages.IMG_TOOL_COPY_DISABLED), true);
+        setupAction(ActionMessages.COPY, ActionMessages.COPY, si.getImageDescriptor(ISharedImages.IMG_TOOL_COPY),
+                si.getImageDescriptor(ISharedImages.IMG_TOOL_COPY),
+                si.getImageDescriptor(ISharedImages.IMG_TOOL_COPY_DISABLED), true);
     }
 
     public TerminalActionCopy(ITerminalViewControl target) {
         super(target, TerminalActionCopy.class.getName());
         setActionDefinitionId("org.eclipse.tcf.terminal.copy"); //$NON-NLS-1$
         ISharedImages si = PlatformUI.getWorkbench().getSharedImages();
-        setupAction(ActionMessages.COPY, ActionMessages.COPY, si
-                .getImageDescriptor(ISharedImages.IMG_TOOL_COPY), si
-                .getImageDescriptor(ISharedImages.IMG_TOOL_COPY), si
-                .getImageDescriptor(ISharedImages.IMG_TOOL_COPY_DISABLED), true);
+        setupAction(ActionMessages.COPY, ActionMessages.COPY, si.getImageDescriptor(ISharedImages.IMG_TOOL_COPY),
+                si.getImageDescriptor(ISharedImages.IMG_TOOL_COPY),
+                si.getImageDescriptor(ISharedImages.IMG_TOOL_COPY_DISABLED), true);
     }
 
     public void run() {
@@ -50,7 +49,8 @@ public class TerminalActionCopy extends AbstractTerminalAction {
 
             if (!selection.equals("")) {//$NON-NLS-1$
                 target.copy();
-            } else {
+            }
+            else {
                 target.sendKey('\u0003');
             }
         }

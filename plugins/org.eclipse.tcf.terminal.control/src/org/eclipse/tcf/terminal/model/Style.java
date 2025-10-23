@@ -15,21 +15,29 @@ import java.util.Map;
 
 /**
  * @author scharf
- * Flyweight
- * Threadsafe.
+ *         Flyweight
+ *         Threadsafe.
  *
  */
 // TODO add an Object for user data, use weak map to keep track of styles with associated
 // user data
 public class Style {
     private final StyleColor fForground;
+
     private final StyleColor fBackground;
+
     private final boolean fBold;
+
     private final boolean fBlink;
+
     private final boolean fUnderline;
+
     private final boolean fReverse;
-    private final static Map<Style, Style> fgStyles=new HashMap<Style, Style>();
-    private Style(StyleColor forground, StyleColor background, boolean bold, boolean blink, boolean underline, boolean reverse) {
+
+    private final static Map<Style, Style> fgStyles = new HashMap<Style, Style>();
+
+    private Style(StyleColor forground, StyleColor background, boolean bold, boolean blink, boolean underline,
+            boolean reverse) {
         fForground = forground;
         fBackground = background;
         fBold = bold;
@@ -37,66 +45,86 @@ public class Style {
         fUnderline = underline;
         fReverse = reverse;
     }
-    public static Style getStyle(StyleColor forground, StyleColor background, boolean bold, boolean blink, boolean underline, boolean reverse) {
-        Style style = new Style(forground,background, bold, blink,underline,reverse);
+
+    public static Style getStyle(StyleColor forground, StyleColor background, boolean bold, boolean blink,
+            boolean underline, boolean reverse) {
+        Style style = new Style(forground, background, bold, blink, underline, reverse);
         Style cached;
         synchronized (fgStyles) {
-            cached=fgStyles.get(style);
-            if(cached==null) {
-                cached=style;
+            cached = fgStyles.get(style);
+            if (cached == null) {
+                cached = style;
                 fgStyles.put(cached, cached);
             }
         }
         return cached;
     }
+
     public static Style getStyle(String forground, String background) {
-        return getStyle(StyleColor.getStyleColor(forground), StyleColor.getStyleColor(background),false,false,false,false);
+        return getStyle(StyleColor.getStyleColor(forground), StyleColor.getStyleColor(background), false, false, false,
+                false);
     }
+
     public static Style getStyle(StyleColor forground, StyleColor background) {
-        return getStyle(forground, background,false,false,false,false);
+        return getStyle(forground, background, false, false, false, false);
     }
+
     public Style setForground(StyleColor forground) {
-        return getStyle(forground,fBackground,fBold,fBlink,fUnderline,fReverse);
+        return getStyle(forground, fBackground, fBold, fBlink, fUnderline, fReverse);
     }
+
     public Style setBackground(StyleColor background) {
-        return getStyle(fForground,background,fBold,fBlink,fUnderline,fReverse);
+        return getStyle(fForground, background, fBold, fBlink, fUnderline, fReverse);
     }
+
     public Style setForground(String colorName) {
-        return getStyle(StyleColor.getStyleColor(colorName),fBackground,fBold,fBlink,fUnderline,fReverse);
+        return getStyle(StyleColor.getStyleColor(colorName), fBackground, fBold, fBlink, fUnderline, fReverse);
     }
+
     public Style setBackground(String colorName) {
-        return getStyle(fForground,StyleColor.getStyleColor(colorName),fBold,fBlink,fUnderline,fReverse);
+        return getStyle(fForground, StyleColor.getStyleColor(colorName), fBold, fBlink, fUnderline, fReverse);
     }
+
     public Style setBold(boolean bold) {
-        return getStyle(fForground,fBackground,bold,fBlink,fUnderline,fReverse);
+        return getStyle(fForground, fBackground, bold, fBlink, fUnderline, fReverse);
     }
+
     public Style setBlink(boolean blink) {
-        return getStyle(fForground,fBackground,fBold,blink,fUnderline,fReverse);
+        return getStyle(fForground, fBackground, fBold, blink, fUnderline, fReverse);
     }
+
     public Style setUnderline(boolean underline) {
-        return getStyle(fForground,fBackground,fBold,fBlink,underline,fReverse);
+        return getStyle(fForground, fBackground, fBold, fBlink, underline, fReverse);
     }
+
     public Style setReverse(boolean reverse) {
-        return getStyle(fForground,fBackground,fBold,fBlink,fUnderline,reverse);
+        return getStyle(fForground, fBackground, fBold, fBlink, fUnderline, reverse);
     }
+
     public StyleColor getBackground() {
         return fBackground;
     }
+
     public boolean isBlink() {
         return fBlink;
     }
+
     public boolean isBold() {
         return fBold;
     }
+
     public StyleColor getForground() {
         return fForground;
     }
+
     public boolean isReverse() {
         return fReverse;
     }
+
     public boolean isUnderline() {
         return fUnderline;
     }
+
     public int hashCode() {
         final int prime = 31;
         int result = 1;
@@ -108,45 +136,33 @@ public class Style {
         result = prime * result + (fUnderline ? 1231 : 1237);
         return result;
     }
+
     public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (getClass() != obj.getClass()) return false;
         final Style other = (Style) obj;
         // background == is the same as equals
-        if (fBackground != other.fBackground)
-            return false;
-        if (fBlink != other.fBlink)
-            return false;
-        if (fBold != other.fBold)
-            return false;
-        if (fForground != other.fForground)
-            return false;
-        if (fReverse != other.fReverse)
-            return false;
-        if (fUnderline != other.fUnderline)
-            return false;
+        if (fBackground != other.fBackground) return false;
+        if (fBlink != other.fBlink) return false;
+        if (fBold != other.fBold) return false;
+        if (fForground != other.fForground) return false;
+        if (fReverse != other.fReverse) return false;
+        if (fUnderline != other.fUnderline) return false;
         return true;
     }
+
     public String toString() {
-        StringBuffer result=new StringBuffer();
+        StringBuffer result = new StringBuffer();
         result.append("Style(foreground="); //$NON-NLS-1$
         result.append(fForground);
         result.append(", background="); //$NON-NLS-1$
         result.append(fBackground);
-        if(fBlink)
-            result.append(", blink"); //$NON-NLS-1$
-        if(fBold)
-            result.append(", bold"); //$NON-NLS-1$
-        if(fBlink)
-            result.append(", blink"); //$NON-NLS-1$
-        if(fReverse)
-            result.append(", reverse"); //$NON-NLS-1$
-        if(fUnderline)
-            result.append(", underline"); //$NON-NLS-1$
+        if (fBlink) result.append(", blink"); //$NON-NLS-1$
+        if (fBold) result.append(", bold"); //$NON-NLS-1$
+        if (fBlink) result.append(", blink"); //$NON-NLS-1$
+        if (fReverse) result.append(", reverse"); //$NON-NLS-1$
+        if (fUnderline) result.append(", underline"); //$NON-NLS-1$
         result.append(")"); //$NON-NLS-1$
         return result.toString();
     }

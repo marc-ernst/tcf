@@ -29,16 +29,19 @@ public interface ITerminalTextData extends ITerminalTextDataReadOnly {
      * Sets the dimensions of the data. If the dimensions are smaller than the current
      * dimensions, the lines will be chopped. If the dimensions are bigger, then
      * the new elements will be filled with 0 chars and null Style.
+     *
      * @param height
      * @param width
      */
     void setDimensions(int height, int width);
 
     void setMaxHeight(int height);
+
     int getMaxHeight();
 
     /**
      * Set a single character and the associated {@link Style}.
+     *
      * @param line line must be >=0 and < height
      * @param column column must be >=0 and < width
      * @param c the new character at this position
@@ -48,6 +51,7 @@ public interface ITerminalTextData extends ITerminalTextDataReadOnly {
 
     /**
      * Set an array of characters showing in the same {@link Style}.
+     *
      * @param line line must be >=0 and < height
      * @param column column must be >=0 and < width
      * @param chars the new characters at this position
@@ -57,6 +61,7 @@ public interface ITerminalTextData extends ITerminalTextDataReadOnly {
 
     /**
      * Set a subrange of an array of characters showing in the same {@link Style}.
+     *
      * @param line line must be >=0 and < height
      * @param column column must be >=0 and < width
      * @param chars the new characters at this position
@@ -66,9 +71,9 @@ public interface ITerminalTextData extends ITerminalTextDataReadOnly {
      */
     void setChars(int line, int column, char[] chars, int start, int len, Style style);
 
-
     /**
      * Cleans the entire line.
+     *
      * @param line
      */
     void cleanLine(int line);
@@ -76,7 +81,9 @@ public interface ITerminalTextData extends ITerminalTextDataReadOnly {
     /**
      * Shifts some lines up or down. The "empty" space is filled with <code>'\000'</code> chars
      * and <code>null</code> {@link Style}
-     * <p>To illustrate shift, here is some sample data:
+     * <p>
+     * To illustrate shift, here is some sample data:
+     *
      * <pre>
      * 0 aaaa
      * 1 bbbb
@@ -86,6 +93,7 @@ public interface ITerminalTextData extends ITerminalTextDataReadOnly {
      * </pre>
      *
      * Shift a region of 3 lines <b>up</b> by one line <code>shift(1,3,-1)</code>
+     *
      * <pre>
      * 0 aaaa
      * 1 cccc
@@ -96,6 +104,7 @@ public interface ITerminalTextData extends ITerminalTextDataReadOnly {
      *
      *
      * Shift a region of 3 lines <b>down</b> by one line <code>shift(1,3,1)</code>
+     *
      * <pre>
      * 0 aaaa
      * 1
@@ -103,40 +112,49 @@ public interface ITerminalTextData extends ITerminalTextDataReadOnly {
      * 3 cccc
      * 4 eeee
      * </pre>
+     *
      * @param startLine the start line of the shift
      * @param size the number of lines to shift
      * @param shift how much scrolling is done. New scrolled area is filled with <code>'\000</code>'.
-     * Negative number means scroll down, positive scroll up (see example above).
+     *        Negative number means scroll down, positive scroll up (see example above).
      */
     void scroll(int startLine, int size, int shift);
 
-    /**Adds a new line to the terminal. If maxHeigth is reached, the entire terminal
+    /**
+     * Adds a new line to the terminal. If maxHeigth is reached, the entire terminal
      * will be scrolled. Else a line will be added.
      */
     void addLine();
+
     /**
      * Copies the entire source into this and changes the size accordingly
+     *
      * @param source
      */
     void copy(ITerminalTextData source);
+
     /**
      * Copy a sourceLine from source to this at destLine.
+     *
      * @param source
      * @param sourceLine
      * @param destLine
      */
-    void copyLine(ITerminalTextData source,int sourceLine, int destLine);
+    void copyLine(ITerminalTextData source, int sourceLine, int destLine);
+
     /**
      * Copy <code>length</code> lines from source starting at sourceLine into this starting at
      * destLine.
+     *
      * @param source
      * @param sourceStartLine
      * @param destStartLine
      * @param length
      */
-    void copyRange(ITerminalTextData source, int sourceStartLine, int destStartLine,int length);
+    void copyRange(ITerminalTextData source, int sourceStartLine, int destStartLine, int length);
 
     void setCursorLine(int line);
+
     void setCursorColumn(int column);
 
     /**

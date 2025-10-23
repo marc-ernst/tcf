@@ -28,6 +28,7 @@ public interface IVT100EmulatorBackend {
     /**
      * Sets the Dimensions of the addressable scroll space of the screen....
      * Keeps the cursor position relative to the bottom of the screen!
+     *
      * @param lines
      * @param cols
      */
@@ -43,7 +44,7 @@ public interface IVT100EmulatorBackend {
     void insertCharacters(int charactersToInsert);
 
     /**
-     *  Erases from cursor to end of screen, including cursor position. Cursor does not move.
+     * Erases from cursor to end of screen, including cursor position. Cursor does not move.
      */
     void eraseToEndOfScreen();
 
@@ -76,6 +77,7 @@ public interface IVT100EmulatorBackend {
      * Inserts n lines at line with cursor. Lines displayed below cursor move down.
      * Lines moved past the bottom margin are lost. This sequence is ignored when
      * cursor is outside scrolling region.
+     *
      * @param n the number of lines to insert
      */
     void insertLines(int n);
@@ -85,9 +87,10 @@ public interface IVT100EmulatorBackend {
      * When a character is deleted, all characters to the right of cursor move
      * left. This creates a space character at right margin. This character
      * has same character attribute as the last character moved left.
+     *
      * @param n
-     * 012345
-     * 0145xx
+     *        012345
+     *        0145xx
      */
     void deleteCharacters(int n);
 
@@ -96,6 +99,7 @@ public interface IVT100EmulatorBackend {
      * lines displayed below cursor move up. Lines added to bottom of screen
      * have spaces with same character attributes as last line moved up. This
      * sequence is ignored when cursor is outside scrolling region.
+     *
      * @param n the number of lines to delete
      */
     void deleteLines(int n);
@@ -108,6 +112,7 @@ public interface IVT100EmulatorBackend {
 
     /**
      * Sets the style to be used from now on
+     *
      * @param style
      */
     void setStyle(Style style);
@@ -178,29 +183,29 @@ public interface IVT100EmulatorBackend {
     /**
      * Enables/disables insert mode (IRM).
      *
-     * @param enable  whether to enable insert mode
+     * @param enable whether to enable insert mode
      */
     void setInsertMode(boolean enable);
 
     /**
      * Set scrolling region. Negative values reset the scroll region.
      *
-     * @param top  top line of scroll region
-     * @param bottom  bottom line of scroll region
+     * @param top top line of scroll region
+     * @param bottom bottom line of scroll region
      */
     void setScrollRegion(int top, int bottom);
 
     /**
      * Scroll text upwards.
      *
-     * @param lines  number of lines to scroll
+     * @param lines number of lines to scroll
      */
     void scrollUp(int lines);
 
     /**
      * Scroll text downwards.
      *
-     * @param lines  number of lines to scroll
+     * @param lines number of lines to scroll
      */
     void scrollDown(int lines);
 }

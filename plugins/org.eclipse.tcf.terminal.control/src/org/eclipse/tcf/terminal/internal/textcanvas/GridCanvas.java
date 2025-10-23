@@ -11,7 +11,6 @@
  *******************************************************************************/
 package org.eclipse.tcf.terminal.internal.textcanvas;
 
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Point;
@@ -28,6 +27,7 @@ import org.eclipse.swt.widgets.ScrollBar;
 abstract public class GridCanvas extends VirtualCanvas {
     /** width of a cell */
     private int fCellWidth;
+
     /** height of a cell */
     private int fCellHeight;
 
@@ -35,52 +35,50 @@ abstract public class GridCanvas extends VirtualCanvas {
         super(parent, style);
         addListener(SWT.MouseWheel, new Listener() {
             public void handleEvent(Event event) {
-                if(getVerticalBar().isVisible()) {
-                    int delta=-fCellHeight;
-                    if(event.count<0)
-                        delta=-delta;
+                if (getVerticalBar().isVisible()) {
+                    int delta = -fCellHeight;
+                    if (event.count < 0) delta = -delta;
                     scrollYDelta(delta);
                 }
-                event.doit=false;
+                event.doit = false;
             }
         });
 
     }
 
-    /** template method paint.
+    /**
+     * template method paint.
      * iterates over all cells in the clipping rectangle and paints them.
      */
     protected void paint(GC gc) {
-        Rectangle clipping=gc.getClipping();
-        if(clipping.width==0 || clipping.height==0)
-            return;
-        Rectangle clientArea= getScreenRectInVirtualSpace();
+        Rectangle clipping = gc.getClipping();
+        if (clipping.width == 0 || clipping.height == 0) return;
+        Rectangle clientArea = getScreenRectInVirtualSpace();
         // Beginning coordinates
-        int xOffset=clientArea.x;
-        int yOffset=clientArea.y;
-        int colFirst=virtualXToCell(xOffset+clipping.x);
-        if(colFirst>getCols())
-            colFirst=getCols();
+        int xOffset = clientArea.x;
+        int yOffset = clientArea.y;
+        int colFirst = virtualXToCell(xOffset + clipping.x);
+        if (colFirst > getCols())
+            colFirst = getCols();
         else if (colFirst < 0) {
             colFirst = 0;
         }
-        int rowFirst=virtualYToCell(yOffset+clipping.y);
+        int rowFirst = virtualYToCell(yOffset + clipping.y);
         // End coordinates
-        int colLast=virtualXToCell(xOffset+clipping.x+clipping.width+fCellWidth);
-        if(colLast>getCols())
-            colLast=getCols();
-        int rowLast=virtualYToCell(yOffset+clipping.y+clipping.height+fCellHeight);
-        if(rowLast>getRows())
-            rowLast=getRows();
+        int colLast = virtualXToCell(xOffset + clipping.x + clipping.width + fCellWidth);
+        if (colLast > getCols()) colLast = getCols();
+        int rowLast = virtualYToCell(yOffset + clipping.y + clipping.height + fCellHeight);
+        if (rowLast > getRows()) rowLast = getRows();
         // System.out.println(rowFirst+"->"+rowLast+" "+System.currentTimeMillis());
         // draw the cells
-        for(int row=rowFirst;row<=rowLast;row++) {
-            int cx=colFirst*fCellWidth-xOffset;
-            int cy=row*fCellHeight-yOffset;
-            drawLine(gc,row,cx,cy,colFirst,colLast);
+        for (int row = rowFirst; row <= rowLast; row++) {
+            int cx = colFirst * fCellWidth - xOffset;
+            int cy = row * fCellHeight - yOffset;
+            drawLine(gc, row, cx, cy, colFirst, colLast);
         }
-        paintUnoccupiedSpace(gc,clipping);
+        paintUnoccupiedSpace(gc, clipping);
     }
+
     /**
      * @param gc
      * @param row the line to draw
@@ -92,6 +90,7 @@ abstract public class GridCanvas extends VirtualCanvas {
     abstract void drawLine(GC gc, int row, int x, int y, int colFirst, int colLast);
 
     abstract protected int getRows();
+
     abstract protected int getCols();
 
     protected void setCellWidth(int cellWidth) {
@@ -113,69 +112,71 @@ abstract public class GridCanvas extends VirtualCanvas {
     }
 
     int virtualXToCell(int x) {
-        return x/fCellWidth;
+        return x / fCellWidth;
     }
 
     int virtualYToCell(int y) {
-        return y/fCellHeight;
+        return y / fCellHeight;
     }
 
     protected Point screenPointToCell(int x, int y) {
-        x=screenXtoVirtual(x)/fCellWidth;
-        y=screenYtoVirtual(y)/fCellHeight;
-        return new Point(x,y);
+        x = screenXtoVirtual(x) / fCellWidth;
+        y = screenYtoVirtual(y) / fCellHeight;
+        return new Point(x, y);
     }
 
     Point screenPointToCell(Point point) {
-        return screenPointToCell(point.x,point.y);
+        return screenPointToCell(point.x, point.y);
     }
 
     protected Point cellToOriginOnScreen(int x, int y) {
-        x=virtualXtoScreen(fCellWidth*x);
-        y=virtualYtoScreen(fCellHeight*y);
-        return new Point(x,y);
+        x = virtualXtoScreen(fCellWidth * x);
+        y = virtualYtoScreen(fCellHeight * y);
+        return new Point(x, y);
     }
 
     Point cellToOriginOnScreen(Point cell) {
-        return cellToOriginOnScreen(cell.x,cell.y);
+        return cellToOriginOnScreen(cell.x, cell.y);
     }
 
     Rectangle getCellScreenRect(Point cell) {
-        return getCellScreenRect(cell.x,cell.y);
+        return getCellScreenRect(cell.x, cell.y);
     }
 
     Rectangle getCellScreenRect(int x, int y) {
-        x=fCellWidth*virtualXtoScreen(x);
-        y=fCellHeight*virtualYtoScreen(y);
-        return new Rectangle(x,y,fCellWidth,fCellHeight);
+        x = fCellWidth * virtualXtoScreen(x);
+        y = fCellHeight * virtualYtoScreen(y);
+        return new Rectangle(x, y, fCellWidth, fCellHeight);
     }
 
     protected Rectangle getCellVirtualRect(Point cell) {
-        return getCellVirtualRect(cell.x,cell.y);
+        return getCellVirtualRect(cell.x, cell.y);
     }
 
     Rectangle getCellVirtualRect(int x, int y) {
-        x=fCellWidth*x;
-        y=fCellHeight*y;
-        return new Rectangle(x,y,fCellWidth,fCellHeight);
+        x = fCellWidth * x;
+        y = fCellHeight * y;
+        return new Rectangle(x, y, fCellWidth, fCellHeight);
     }
+
     protected void viewRectangleChanged(int x, int y, int width, int height) {
-        int cellX=virtualXToCell(x);
-        int cellY=virtualYToCell(y);
+        int cellX = virtualXToCell(x);
+        int cellY = virtualYToCell(y);
         // End coordinates
-        int xE=virtualXToCell(x+width);
-//      if(xE>getCols())
-//          xE=getCols();
-        int yE=virtualYToCell(y+height);
-//      if(yE>getRows())
-//          yE=getRows();
-        visibleCellRectangleChanged(cellX,cellY,xE-cellX,yE-cellY);
+        int xE = virtualXToCell(x + width);
+        // if(xE>getCols())
+        // xE=getCols();
+        int yE = virtualYToCell(y + height);
+        // if(yE>getRows())
+        // yE=getRows();
+        visibleCellRectangleChanged(cellX, cellY, xE - cellX, yE - cellY);
     }
 
     /**
      * Called when the viewed part has changed.
      * Override when you need this information....
      * Is only called if the values change (well, almost)
+     *
      * @param x origin of visible cells
      * @param y origin of visible cells
      * @param width number of cells visible in x direction
@@ -198,7 +199,8 @@ abstract public class GridCanvas extends VirtualCanvas {
             int remainder = y % cellHeight;
             if (remainder < 0) {
                 y -= (cellHeight + remainder);
-            } else {
+            }
+            else {
                 y -= remainder;
             }
         }
@@ -206,7 +208,7 @@ abstract public class GridCanvas extends VirtualCanvas {
     }
 
     protected void scrollY(ScrollBar vBar) {
-        int vSelection = vBar.getSelection ();
+        int vSelection = vBar.getSelection();
         Rectangle bounds = getVirtualBounds();
         int y = -vSelection;
         int cellHeight = getCellHeight();
@@ -214,13 +216,14 @@ abstract public class GridCanvas extends VirtualCanvas {
             int remainder = y % cellHeight;
             if (remainder < 0) {
                 y -= (cellHeight + remainder);
-            } else {
+            }
+            else {
                 y -= remainder;
             }
         }
         int deltaY = y - bounds.y;
-        if(deltaY!=0) {
-            scrollSmart(0,deltaY);
+        if (deltaY != 0) {
+            scrollSmart(0, deltaY);
             setVirtualOrigin(bounds.x, bounds.y += deltaY);
         }
         if (-bounds.y + getRows() * getCellHeight() >= bounds.height) {

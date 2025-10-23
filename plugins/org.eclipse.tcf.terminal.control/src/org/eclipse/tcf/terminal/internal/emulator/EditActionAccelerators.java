@@ -20,6 +20,7 @@ import org.eclipse.ui.keys.IBindingService;
 
 class EditActionAccelerators {
     private static final String COPY_COMMAND_ID = "org.eclipse.tcf.terminal.copy"; //$NON-NLS-1$
+
     private static final String PASTE_COMMAND_ID = "org.eclipse.tcf.terminal.paste"; //$NON-NLS-1$
 
     private final Map commandIdsByAccelerator = new HashMap();
@@ -31,7 +32,7 @@ class EditActionAccelerators {
 
     private void addAccelerator(String commandId) {
         TriggerSequence[] bindings = bindingsFor(commandId);
-        for (int i=0; i<bindings.length; ++i) {
+        for (int i = 0; i < bindings.length; ++i) {
             if (bindings[i] instanceof KeySequence) {
                 KeyStroke[] keyStrokes = ((KeySequence) bindings[i]).getKeyStrokes();
                 if (keyStrokes.length != 0) {

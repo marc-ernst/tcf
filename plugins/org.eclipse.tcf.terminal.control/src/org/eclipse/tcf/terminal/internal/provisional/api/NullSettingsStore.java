@@ -14,7 +14,9 @@ package org.eclipse.tcf.terminal.internal.provisional.api;
  */
 public class NullSettingsStore implements ISettingsStore {
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     *
      * @see org.eclipse.tcf.internal.terminal.provisional.api.ISettingsStore#get(java.lang.String)
      */
     @Override
@@ -22,7 +24,9 @@ public class NullSettingsStore implements ISettingsStore {
         return null;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     *
      * @see org.eclipse.tcf.internal.terminal.provisional.api.ISettingsStore#get(java.lang.String, java.lang.String)
      */
     @Override
@@ -30,7 +34,9 @@ public class NullSettingsStore implements ISettingsStore {
         return defaultValue;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     *
      * @see org.eclipse.tcf.internal.terminal.provisional.api.ISettingsStore#put(java.lang.String, java.lang.String)
      */
     @Override

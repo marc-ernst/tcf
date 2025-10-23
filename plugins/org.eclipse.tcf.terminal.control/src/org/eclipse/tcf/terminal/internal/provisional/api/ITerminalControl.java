@@ -54,6 +54,7 @@ public interface ITerminalControl {
 
     /**
      * A shell to show dialogs.
+     *
      * @return the shell in which the terminal is shown.
      */
     Shell getShell();
@@ -105,22 +106,24 @@ public interface ITerminalControl {
 
     /**
      * @return a stream used to write to the terminal. Any bytes written to this
-     * stream appear in the terminal or are interpreted by the emulator as
-     * control sequences. The stream in the opposite direction, terminal
-     * to remote is in {@link ITerminalConnector#getTerminalToRemoteStream()}.
+     *         stream appear in the terminal or are interpreted by the emulator as
+     *         control sequences. The stream in the opposite direction, terminal
+     *         to remote is in {@link ITerminalConnector#getTerminalToRemoteStream()}.
      */
     OutputStream getRemoteToTerminalOutputStream();
 
     /**
      * Set the title of the terminal view.
+     *
      * @param title
      */
     void setTerminalTitle(String title);
 
     /**
      * Show an error message during connect.
+     *
      * @param msg
-     * TODO: Michael Scharf: Should be replaced by a better error notification mechanism!
+     *        TODO: Michael Scharf: Should be replaced by a better error notification mechanism!
      */
     void setMsg(String msg);
 

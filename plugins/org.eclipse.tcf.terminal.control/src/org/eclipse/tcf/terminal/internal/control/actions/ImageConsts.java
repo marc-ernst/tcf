@@ -19,9 +19,13 @@ package org.eclipse.tcf.terminal.internal.control.actions;
 
 public interface ImageConsts {
     public final static String IMAGE_DIR_ROOT = "icons/"; //$NON-NLS-1$
-    public final static String IMAGE_DIR_LOCALTOOL = IMAGE_DIR_ROOT + "clcl16/"; // basic colors - size 16x16 //$NON-NLS-1$
+
+    public final static String IMAGE_DIR_LOCALTOOL = IMAGE_DIR_ROOT + "clcl16/"; // basic colors - size //$NON-NLS-1$
+                                                                                 // 16x16
+
     public final static String IMAGE_DIR_DLCL = IMAGE_DIR_ROOT + "dlcl16/"; // disabled - size 16x16 //$NON-NLS-1$
-    public final static String IMAGE_DIR_ELCL = IMAGE_DIR_ROOT+ "elcl16/"; // enabled - size 16x16 //$NON-NLS-1$
+
+    public final static String IMAGE_DIR_ELCL = IMAGE_DIR_ROOT + "elcl16/"; // enabled - size 16x16 //$NON-NLS-1$
 
     public static final String IMAGE_CLCL_CLEAR_ALL = "ImageClclClearAll"; //$NON-NLS-1$
 

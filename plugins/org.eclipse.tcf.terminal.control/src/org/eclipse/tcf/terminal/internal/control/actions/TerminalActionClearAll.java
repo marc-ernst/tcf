@@ -14,7 +14,8 @@
  * Michael Scharf (Wind River) - split into core, view and connector plugins
  * Martin Oberhuber (Wind River) - fixed copyright headers and beautified
  * Anna Dushistova (MontaVista) - [227537] moved actions from terminal.view to terminal plugin
- * Uwe Stieber (Wind River) - [260372] [terminal] Certain terminal actions are enabled if no target terminal control is available
+ * Uwe Stieber (Wind River) - [260372] [terminal] Certain terminal actions are enabled if no target terminal control is
+ * available
  ********************************************************************************/
 package org.eclipse.tcf.terminal.internal.control.actions;
 
@@ -24,19 +25,15 @@ public class TerminalActionClearAll extends AbstractTerminalAction {
     public TerminalActionClearAll() {
         super(TerminalActionClearAll.class.getName());
 
-        setupAction(ActionMessages.CLEARALL, ActionMessages.CLEARALL,
-                ImageConsts.IMAGE_CLCL_CLEAR_ALL,
-                ImageConsts.IMAGE_ELCL_CLEAR_ALL,
-                ImageConsts.IMAGE_DLCL_CLEAR_ALL, false);
+        setupAction(ActionMessages.CLEARALL, ActionMessages.CLEARALL, ImageConsts.IMAGE_CLCL_CLEAR_ALL,
+                ImageConsts.IMAGE_ELCL_CLEAR_ALL, ImageConsts.IMAGE_DLCL_CLEAR_ALL, false);
     }
 
     public TerminalActionClearAll(ITerminalViewControl target) {
         super(target, TerminalActionClearAll.class.getName());
 
-        setupAction(ActionMessages.CLEARALL, ActionMessages.CLEARALL,
-                ImageConsts.IMAGE_CLCL_CLEAR_ALL,
-                ImageConsts.IMAGE_ELCL_CLEAR_ALL,
-                ImageConsts.IMAGE_DLCL_CLEAR_ALL, false);
+        setupAction(ActionMessages.CLEARALL, ActionMessages.CLEARALL, ImageConsts.IMAGE_CLCL_CLEAR_ALL,
+                ImageConsts.IMAGE_ELCL_CLEAR_ALL, ImageConsts.IMAGE_DLCL_CLEAR_ALL, false);
     }
 
     public void run() {

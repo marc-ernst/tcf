@@ -22,8 +22,8 @@ package org.eclipse.tcf.terminal.model;
  *
  * <pre>
  * for (int line = 0; line &lt; term.getHeight(); line++)
- *  for (int column = 0; column &lt; term.getWidth(); column++)
- *      drawCharacter(column, line, term.getChar(column, line), term.getStyle(column, line));
+ *     for (int column = 0; column &lt; term.getWidth(); column++)
+ *         drawCharacter(column, line, term.getChar(column, line), term.getStyle(column, line));
  * </pre>
  *
  * This might fail because the background thread could change the dimensions of
@@ -48,10 +48,9 @@ package org.eclipse.tcf.terminal.model;
  * <pre>
  * // iterate over the potentially changed lines
  * for (int line = snap.getFirstChangedLine(); line &lt;= snap.getLastChangedLine(); line++)
- *  // redraw only if the line has changed
- *  if (snap.hasLineChanged(line))
- *      for (int column = 0; column &lt; snap.getWidth(); column++)
- *          drawCharacter(column, line, snap.getChar(column, line), snap.getStyle(column, line));
+ *     // redraw only if the line has changed
+ *     if (snap.hasLineChanged(line)) for (int column = 0; column &lt; snap.getWidth(); column++)
+ *         drawCharacter(column, line, snap.getChar(column, line), snap.getStyle(column, line));
  * </pre>
  *
  * <p>
@@ -68,10 +67,9 @@ package org.eclipse.tcf.terminal.model;
  * doUIScrolling(snap.getScrollChangeY(), snap.getScrollChangeN(), snap.getScrollChangeShift());
  * // iterate over the potentially changed lines
  * for (int line = snap.getFirstChangedLine(); line &lt;= snap.getFirstChangedLine(); line++)
- *  // redraw only if the line has changed
- *  if (snap.hasLineChanged(line))
- *      for (int column = 0; column &lt; snap.getWidth(); column++)
- *          drawCharacter(column, line, snap.getChar(column, line), snap.getStyle(column, line));
+ *     // redraw only if the line has changed
+ *     if (snap.hasLineChanged(line)) for (int column = 0; column &lt; snap.getWidth(); column++)
+ *         drawCharacter(column, line, snap.getChar(column, line), snap.getStyle(column, line));
  * </pre>
  *
  * </p>
@@ -96,17 +94,21 @@ public interface ITerminalTextDataSnapshot extends ITerminalTextDataReadOnly {
      * after the {@link #snapshotOutOfDate(ITerminalTextDataSnapshot)} has been called. It would introduce a
      * delay to update the UI (and the snapshot} 10 or 20 times per second.
      *
-     * <p>Make sure you don't spend too much time in this method.
+     * <p>
+     * Make sure you don't spend too much time in this method.
      */
     interface SnapshotOutOfDateListener {
         /**
          * Gets called when the snapshot is out of date. To get the snapshot up to date,
          * call {@link ITerminalTextDataSnapshot#updateSnapshot(boolean)}.
+         *
          * @param snapshot The snapshot that is out of date
          */
         void snapshotOutOfDate(ITerminalTextDataSnapshot snapshot);
     }
+
     void addListener(SnapshotOutOfDateListener listener);
+
     void removeListener(SnapshotOutOfDateListener listener);
 
     /**
@@ -114,6 +116,7 @@ public interface ITerminalTextDataSnapshot extends ITerminalTextDataReadOnly {
      * has been called no new snapshot data is collected.
      */
     void detach();
+
     /**
      * @return true if the data has changed since the previous snapshot.
      */
@@ -123,60 +126,72 @@ public interface ITerminalTextDataSnapshot extends ITerminalTextDataReadOnly {
      * The window of interest is the region the snapshot should track.
      * Changes outside this region are ignored. The change takes effect after
      * an update!
+     *
      * @param startLine -1 means track the end of the data
      * @param size number of lines to track. A size of -1 means track all.
      */
     void setInterestWindow(int startLine, int size);
+
     int getInterestWindowStartLine();
+
     int getInterestWindowSize();
 
     /**
      * Create a new snapshot of the {@link ITerminalTextData}. It will efficiently
      * copy the data of the {@link ITerminalTextData} into an internal representation.
      * The snapshot also keeps track of the changes since the previous snapshot.
-     * <p>With the methods {@link #getFirstChangedLine()}, {@link #getLastChangedLine()} and
+     * <p>
+     * With the methods {@link #getFirstChangedLine()}, {@link #getLastChangedLine()} and
      * {@link #hasLineChanged(int)}
      * you can find out what has changed in the current snapshot since the previous snapshot.
+     *
      * @param detectScrolling if <code>true</code> the snapshot tries to identify scroll
-     * changes since the last snapshot. In this case the information about scrolling
-     * can be retrieved using the following methods:
-     * {@link #getScrollWindowStartLine()}, {@link #getScrollWindowSize()} and {@link #getScrollWindowShift()}
-     * <br><b>Note:</b> The method {@link #hasLineChanged(int)} returns changes <b>after</b> the
-     * scrolling has been applied.
+     *        changes since the last snapshot. In this case the information about scrolling
+     *        can be retrieved using the following methods:
+     *        {@link #getScrollWindowStartLine()}, {@link #getScrollWindowSize()} and {@link #getScrollWindowShift()}
+     *        <br>
+     *        <b>Note:</b> The method {@link #hasLineChanged(int)} returns changes <b>after</b> the
+     *        scrolling has been applied.
      */
     void updateSnapshot(boolean detectScrolling);
 
     /**
      * @return The first line changed in this snapshot compared
-     * to the previous snapshot.
+     *         to the previous snapshot.
      *
-     * <p><b>Note:</b> If no line has changed, this
-     * returns {@link Integer#MAX_VALUE}
+     *         <p>
+     *         <b>Note:</b> If no line has changed, this
+     *         returns {@link Integer#MAX_VALUE}
      *
-     * <p><b>Note:</b> if {@link #updateSnapshot(boolean)} has been called with <code>true</code>,
-     * then this does not include lines that only have been scrolled. This is the
-     * first line that has changed <b>after</b> the scroll has been applied.
+     *         <p>
+     *         <b>Note:</b> if {@link #updateSnapshot(boolean)} has been called with <code>true</code>,
+     *         then this does not include lines that only have been scrolled. This is the
+     *         first line that has changed <b>after</b> the scroll has been applied.
      */
     int getFirstChangedLine();
 
     /**
      * @return The last line changed in this snapshot compared
-     * to the previous snapshot. If the height has changed since the
-     * last update of the snapshot, then the returned value is within
-     * the new dimensions.
+     *         to the previous snapshot. If the height has changed since the
+     *         last update of the snapshot, then the returned value is within
+     *         the new dimensions.
      *
-     * <p><b>Note:</b> If no line has changed, this returns <code>-1</code>
+     *         <p>
+     *         <b>Note:</b> If no line has changed, this returns <code>-1</code>
      *
-     * <p><b>Note:</b> if {@link #updateSnapshot(boolean)} has been called with <code>true</code>,
-     * then this does not include lines that only have been scrolled. This is the
-     * last line that has changed <b>after</b> the scroll has been applied.
+     *         <p>
+     *         <b>Note:</b> if {@link #updateSnapshot(boolean)} has been called with <code>true</code>,
+     *         then this does not include lines that only have been scrolled. This is the
+     *         last line that has changed <b>after</b> the scroll has been applied.
      *
-     * <p>A typical for loop using this method would look like this (note the <code>&lt;=</code> in the for loop):
-     * <pre>
+     *         <p>
+     *         A typical for loop using this method would look like this (note the <code>&lt;=</code> in the for loop):
+     *
+     *         <pre>
      * for(int line=snap.{@link #getFirstChangedLine()}; line <b>&lt;=</b> snap.getLastChangedLine(); line++)
      *    if(snap.{@link #hasLineChanged(int) hasLineChanged(line)})
      *       doSomething(line);
-     * </pre>
+     *         </pre>
      */
     int getLastChangedLine();
 
@@ -190,31 +205,35 @@ public interface ITerminalTextDataSnapshot extends ITerminalTextDataReadOnly {
 
     /**
      * @return true if the terminal has changed (and not just the
-     * window of interest)
+     *         window of interest)
      */
     boolean hasTerminalChanged();
+
     /**
      * If {@link #updateSnapshot(boolean)} was called with <code>true</code>, then this method
      * returns the top of the scroll region.
+     *
      * @return The first line scrolled in this snapshot compared
-     * to the previous snapshot. See also {@link ITerminalTextData#scroll(int, int, int)}.
+     *         to the previous snapshot. See also {@link ITerminalTextData#scroll(int, int, int)}.
      */
     int getScrollWindowStartLine();
 
     /**
      * If {@link #updateSnapshot(boolean)} was called with <code>true</code>, then this method
      * returns the size of the scroll region.
-     * @return The number of lines scrolled  in this snapshot compared
-     * to the previous snapshot. See also {@link ITerminalTextData#scroll(int, int, int)}
-     * If nothing has changed, 0 is returned.
+     *
+     * @return The number of lines scrolled in this snapshot compared
+     *         to the previous snapshot. See also {@link ITerminalTextData#scroll(int, int, int)}
+     *         If nothing has changed, 0 is returned.
      */
     int getScrollWindowSize();
 
     /**
      * If {@link #updateSnapshot(boolean)} was called with <code>true</code>, then this method
      * returns number of lines moved by the scroll region.
+     *
      * @return The the scroll shift of this snapshot compared
-     * to the previous snapshot. See also {@link ITerminalTextData#scroll(int, int, int)}
+     *         to the previous snapshot. See also {@link ITerminalTextData#scroll(int, int, int)}
      */
     int getScrollWindowShift();
 

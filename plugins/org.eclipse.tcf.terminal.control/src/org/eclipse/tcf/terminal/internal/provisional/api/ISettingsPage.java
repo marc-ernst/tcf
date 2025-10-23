@@ -17,14 +17,14 @@ import org.eclipse.swt.widgets.Control;
 /**
  * @author Michael Scharf
  *
- * TODO: Michael Scharf: provide a long description of a wizard
- * TODO: Michael Scharf: allow multiple pages to be generated
- * <p>
- * <strong>EXPERIMENTAL</strong>. This class or interface has been added as
- * part of a work in progress. There is no guarantee that this API will
- * work or that it will remain the same. Please do not use this API without
- * consulting with the <a href="http://www.eclipse.org/tm/">Target Management</a> team.
- * </p>
+ *         TODO: Michael Scharf: provide a long description of a wizard
+ *         TODO: Michael Scharf: allow multiple pages to be generated
+ *         <p>
+ *         <strong>EXPERIMENTAL</strong>. This class or interface has been added as
+ *         part of a work in progress. There is no guarantee that this API will
+ *         work or that it will remain the same. Please do not use this API without
+ *         consulting with the <a href="http://www.eclipse.org/tm/">Target Management</a> team.
+ *         </p>
  */
 public interface ISettingsPage {
 
@@ -41,6 +41,7 @@ public interface ISettingsPage {
 
     /**
      * Create a page to be shown in a dialog or wizard to setup the connection.
+     *
      * @param parent
      */
     void createControl(Composite parent);

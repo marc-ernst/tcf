@@ -15,18 +15,21 @@ import org.eclipse.tcf.terminal.internal.provisional.api.TerminalState;
 
 /**
  * Provided by a view implementation.
+ *
  * @author Michael Scharf
  *
  */
 public interface ITerminalListener {
     /**
      * Called when the state of the connection has changed.
+     *
      * @param state
      */
     void setState(TerminalState state);
 
     /**
      * Set the title of the terminal.
+     *
      * @param title
      */
     void setTerminalTitle(String title);

@@ -54,22 +54,27 @@ public interface ITerminalTextDataReadOnly {
      * Creates a new instance of {@link ITerminalTextDataSnapshot} that
      * can be used to track changes. Make sure to call {@link ITerminalTextDataSnapshot#detach()}
      * if you don't need the snapshots anymore.
-     * <p><b>Note: </b>A new snapshot is empty and needs a call to {@link ITerminalTextDataSnapshot#updateSnapshot(boolean)} to
+     * <p>
+     * <b>Note: </b>A new snapshot is empty and needs a call to
+     * {@link ITerminalTextDataSnapshot#updateSnapshot(boolean)} to
      * get its initial values. You might want to setup the snapshot to your needs by calling
      * {@link ITerminalTextDataSnapshot#setInterestWindow(int, int)}.
      * </p>
+     *
      * @return a new instance of {@link ITerminalTextDataSnapshot} that "listens" to changes of
-     * <code>this</code>.
+     *         <code>this</code>.
      */
     public ITerminalTextDataSnapshot makeSnapshot();
 
     char[] getChars(int line);
+
     Style[] getStyles(int line);
 
     /**
      * @return the line in which the cursor is at the moment
      */
     int getCursorLine();
+
     /**
      * @return the column at which the cursor is at the moment
      */

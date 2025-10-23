@@ -20,13 +20,16 @@ package org.eclipse.tcf.terminal.internal.preferences;
  */
 public interface ITerminalConstants {
 
-    public static final String  PREF_HAS_MIGRATED      = "TerminalPref.migrated"; //$NON-NLS-1$
+    public static final String PREF_HAS_MIGRATED = "TerminalPref.migrated"; //$NON-NLS-1$
 
-    public static final String  PREF_BUFFERLINES       = "TerminalPrefBufferLines"; //$NON-NLS-1$
-    public static final String  PREF_INVERT_COLORS     = "TerminalPrefInvertColors"; //$NON-NLS-1$
-    public static final int     DEFAULT_BUFFERLINES    = 1000;
-    public static final boolean DEFAULT_INVERT_COLORS  = false;
+    public static final String PREF_BUFFERLINES = "TerminalPrefBufferLines"; //$NON-NLS-1$
 
-    public static final String  FONT_DEFINITION = "terminal.views.view.font.definition"; //$NON-NLS-1$
+    public static final String PREF_INVERT_COLORS = "TerminalPrefInvertColors"; //$NON-NLS-1$
+
+    public static final int DEFAULT_BUFFERLINES = 1000;
+
+    public static final boolean DEFAULT_INVERT_COLORS = false;
+
+    public static final String FONT_DEFINITION = "terminal.views.view.font.definition"; //$NON-NLS-1$
 
 }

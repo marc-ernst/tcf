@@ -15,12 +15,12 @@ package org.eclipse.tcf.terminal.internal.provisional.api;
  * A simple interface to a store to persist the state of a connection.
  *
  * @author Michael Scharf
- * <p>
- * <strong>EXPERIMENTAL</strong>. This class or interface has been added as
- * part of a work in progress. There is no guarantee that this API will
- * work or that it will remain the same. Please do not use this API without
- * consulting with the <a href="http://www.eclipse.org/tm/">Target Management</a> team.
- * </p>
+ *         <p>
+ *         <strong>EXPERIMENTAL</strong>. This class or interface has been added as
+ *         part of a work in progress. There is no guarantee that this API will
+ *         work or that it will remain the same. Please do not use this API without
+ *         consulting with the <a href="http://www.eclipse.org/tm/">Target Management</a> team.
+ *         </p>
  */
 public interface ISettingsStore {
     /**
@@ -38,6 +38,7 @@ public interface ISettingsStore {
 
     /**
      * Save a string value
+     *
      * @param key alpha numeric key, may contain dots (.)
      * @param value
      */

@@ -19,25 +19,29 @@ import org.eclipse.tcf.terminal.internal.provisional.api.ITerminalConnector;
 public class TerminalViewControlFactory {
     /**
      * Instantiate a Terminal widget.
+     *
      * @param target Callback for notifying the owner of Terminal state changes.
      * @param wndParent The Window parent to embed the Terminal in.
      * @param connectors Provided connectors.
      */
-    public static ITerminalViewControl makeControl(ITerminalListener target, Composite wndParent, ITerminalConnector[] connectors) {
+    public static ITerminalViewControl makeControl(ITerminalListener target, Composite wndParent,
+            ITerminalConnector[] connectors) {
         return makeControl(target, wndParent, connectors, false);
     }
 
     /**
      * Instantiate a Terminal widget.
+     *
      * @param target Callback for notifying the owner of Terminal state changes.
      * @param wndParent The Window parent to embed the Terminal in.
      * @param connectors Provided connectors.
      * @param useCommonPrefs If <code>true</code>, the Terminal widget will pick up settings
-     *    from the <code>org.eclipse.tcf.terminal.TerminalPreferencePage</code> Preference page.
-     *    Otherwise, clients need to maintain settings themselves.
+     *        from the <code>org.eclipse.tcf.terminal.TerminalPreferencePage</code> Preference page.
+     *        Otherwise, clients need to maintain settings themselves.
      * @since 3.2
      */
-    public static ITerminalViewControl makeControl(ITerminalListener target, Composite wndParent, ITerminalConnector[] connectors, boolean useCommonPrefs) {
+    public static ITerminalViewControl makeControl(ITerminalListener target, Composite wndParent,
+            ITerminalConnector[] connectors, boolean useCommonPrefs) {
         return new VT100TerminalControl(target, wndParent, connectors, useCommonPrefs);
     }
 
