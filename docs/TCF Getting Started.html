@@ -41,12 +41,11 @@ below are steps to create and populate an Eclipse workspace with TCF projects:</
    <li>Open the "Java" perspective.
    <li>In "Package Explorer" view: do right click and then select "Import...".<ul>
      <li>If EGit is installed, choose "Git", otherwise choose "General/Existing Projects into Workspace" and click "Next".</li>
-     <li>Clone TCF Java code from <a href='https://git.eclipse.org/c/tcf/org.eclipse.tcf.git'>Eclipse GIT repository</a>.
+     <li>Clone TCF Java code from <a href='https://gitlab.eclipse.org/eclipse/tcf/tcf.git'>Eclipse GIT repository</a>.
    If you intend contributing, best get an account from <a href="">Eclipse Gerrit</a>, sign the CLA, and use the
    https: URL with your username below. Alternatively, anonymous access is possible as well from any of the below:
 <pre>
-git clone https://git.eclipse.org/r/tcf/org.eclipse.tcf.git
-git clone ssh://&lt;user&gt;@git.eclipse.org:29418/tcf/org.eclipse.tcf.git
+git clone https://gitlab.eclipse.org/eclipse/tcf/tcf.git
 </pre></ul></li>
    <li>Setting the Target Platform:<ul>
      <li>For import, select root directory: &lt;TCF Root&gt;/admin, and click "Next".
@@ -131,10 +130,9 @@ Examples source code is stored in <code>&lt;TCF Root&gt;/examples</code> directo
 
 <h2><a name='Agent'>Building TCF Agent</a></h2>
 
-Clone TCF C code from <a href='https://git.eclipse.org/c/tcf/org.eclipse.tcf.agent.git'>Eclipse GIT repository</a>, using one of the following commands:
+Clone TCF C code from <a href='https://gitlab.eclipse.org/eclipse/tcf/tcf.agent.git'>Eclipse GIT repository</a>, using one of the following commands:
 <pre>
-git clone https://git.eclipse.org/r/tcf/org.eclipse.tcf.agent.git
-git clone ssh://&lt;user&gt;@git.eclipse.org:29418/tcf/org.eclipse.tcf.agent.git
+git clone https://gitlab.eclipse.org/eclipse/tcf/tcf.agent.git
 </pre>
 
 <p><b>CDT</b> can be used to build TCF agent.
@@ -150,7 +148,7 @@ CDT .project file is located in <code>&lt;TCF Root&gt;/agent</code> directory.
 
 <p><b>Windows</b>: For building the agent, there are two possibilities:
 <ul>
-<li>Building with gcc (freely available from <a href="http://wascana.sourceforge.net/">Wascana</a>,
+<li>Building with gcc (freely available from
 <a href="http://www.cygwin.com">Cygwin</a> or the
 <a href="http://www.mingw.org/">MinGW32 project</a>): run
 <pre>make</pre> or <pre>make OPSYS=Msys</pre>
