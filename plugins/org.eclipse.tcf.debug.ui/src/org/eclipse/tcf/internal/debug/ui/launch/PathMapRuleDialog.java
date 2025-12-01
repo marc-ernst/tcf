@@ -10,6 +10,9 @@
  *******************************************************************************/
 package org.eclipse.tcf.internal.debug.ui.launch;
 
+import java.nio.file.InvalidPathException;
+import java.nio.file.Paths;
+
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.swt.SWT;
@@ -109,7 +112,7 @@ public class PathMapRuleDialog extends TitleAreaDialog {
 
         source_text.addModifyListener(new ModifyListener() {
             public void modifyText(ModifyEvent e) {
-                updateButtons();
+                validateAndUpdateUI();
             }
         });
 
@@ -130,7 +133,7 @@ public class PathMapRuleDialog extends TitleAreaDialog {
 
         destination_text.addModifyListener(new ModifyListener() {
             public void modifyText(ModifyEvent e) {
-                updateButtons();
+                validateAndUpdateUI();
             }
         });
 
@@ -197,12 +200,12 @@ public class PathMapRuleDialog extends TitleAreaDialog {
 
     private void getData() {
         if (source_text.getText().trim().length() > 0)
-            pathMapRule.getProperties().put(IPathMap.PROP_SOURCE, source_text.getText());
+            pathMapRule.getProperties().put(IPathMap.PROP_SOURCE, source_text.getText().trim());
         else
             pathMapRule.getProperties().remove(IPathMap.PROP_SOURCE);
 
         if (destination_text.getText().trim().length() > 0)
-            pathMapRule.getProperties().put(IPathMap.PROP_DESTINATION, destination_text.getText());
+            pathMapRule.getProperties().put(IPathMap.PROP_DESTINATION, destination_text.getText().trim());
         else
             pathMapRule.getProperties().remove(IPathMap.PROP_DESTINATION);
 
@@ -212,9 +215,38 @@ public class PathMapRuleDialog extends TitleAreaDialog {
             pathMapRule.getProperties().remove(IPathMap.PROP_CONTEXT_QUERY);
     }
 
+    /**
+     * Validates both destination path and updates the UI accordingly.
+     * Updates the error message at the top of the dialog and enables/disables the OK button.
+     */
+    private void validateAndUpdateUI() {
+        if (!enable_editing) {
+            updateButtons();
+            return;
+        }
+
+        String errorMessage = null;
+        try {
+            // Validate destination path
+            String destinationPath = destination_text.getText().trim();
+            if (destinationPath.isEmpty()) {
+                return;
+            }
+            Paths.get(destinationPath);
+        }
+        catch (InvalidPathException e) {
+            errorMessage = "Invalid destination path: " + e.getMessage();
+        }
+        finally {
+            setErrorMessage(errorMessage);
+            updateButtons();
+        }
+    }
+
     private void updateButtons() {
         Button btn = getButton(IDialogConstants.OK_ID);
-        if (btn != null && source_text != null) btn.setEnabled(!enable_editing || source_text.getText().trim().length() > 0);
+        if (btn != null && source_text != null)
+            btn.setEnabled(!enable_editing || (getErrorMessage() == null && source_text.getText().trim().length() > 0));
     }
 
     @Override
